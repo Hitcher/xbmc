@@ -10253,7 +10253,7 @@ const infomap slideshow[] = {
 /// \page modules__infolabels_boolean_conditions
 /// \section modules_rm_infolabels_booleans Additional revision history for Infolabels and Boolean Conditions
 /// <hr>
-/// \subsection modules_rm_infolabels_booleans_v22 Kodi v22
+/// \subsection modules_rm_infolabels_booleans_v22 Kodi v22 (Piers)
 /// @skinning_v22 **[Removed Infolabels]** The following infolabels have been removed:
 ///   - `Player.Cutlist` - Please use \link Player_Editlist `Player.EditList`\endlink for the EDL list and \link Player_Cuts `Player.Cuts`\endlink for the cut markers
 ///   - `Slideshow.EXIFSoftware`- This infolabel was broken (did nothing) in previous versions. It might be re-added later.
