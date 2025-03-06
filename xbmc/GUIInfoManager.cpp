@@ -102,8 +102,9 @@ typedef struct
 /// @todo [docs] Use links instead of bold values for infolabels/bools
 /// so we can use a link to point users when providing help
 ///
-
-
+// Create some space for Table of Contents
+/// \htmlonly <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> \endhtmlonly
+///
 /// \page modules__infolabels_boolean_conditions
 /// \section modules_list_infolabels_booleans List of Infolabels and Boolean conditions
 /// \subsection modules__infolabels_boolean_conditions_Addon Addon
@@ -10222,6 +10223,120 @@ const infomap window_bools[] =   {{ "ismedia",          WINDOW_IS_MEDIA },
                                   { "ismodaldialogtopmost", WINDOW_IS_MODAL_DIALOG_TOPMOST },
                                   { "previous",         WINDOW_PREVIOUS },
                                   { "next",             WINDOW_NEXT }};
+
+/// \page modules__infolabels_boolean_conditions
+/// \section modules_rm_infolabels_booleans Additional revision history for Infolabels and Boolean Conditions
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v22 Kodi v22 (Piers)
+/// @skinning_v22 **[Removed Infolabels]** The following infolabels have been removed:
+///   - `Player.Cutlist` - Please use \link Player_Editlist `Player.EditList`\endlink for the EDL list and \link Player_Cuts `Player.Cuts`\endlink for the cut markers
+///   - `Slideshow.EXIFSoftware`- This infolabel was broken (did nothing) in previous versions. It might be re-added later.
+///
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v21 Kodi v21 (Omega)
+/// @skinning_v21 **[Removed Infolabels]** The following infolabels have been removed:
+///   - `Network.DHCPAddress` - this info did not return any meaningful value (always an empty string)
+///
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v20 Kodi v20 (Nexus)
+/// @skinning_v20 **[Removed Boolean conditions]** The following boolean conditions have been removed:
+///   - `Player.DisplayAfterSeek` - use \link Player_HasPerformedSeek `Player.HasPerformedSeek(interval)`\endlink instead
+///
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v19 Kodi v19 (Matrix)
+/// @skinning_v19 **[Removed Infolabels]** The following infolabels have been removed:
+///   - `System.Platform.Linux.RaspberryPi` - use \link System_Platform_Linux `System.Platform.Linux`\endlink instead
+///
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v18 Kodi v18 (Leia)
+///
+/// @skinning_v18 **[Removed Infolabels]** The following infolabels have been removed:
+///   - `Listitem.Property(artistthumbs)`, `Listitem.Property(artistthumb)` - use
+/// \link ListItem_Art_Type `ListItem.Art(type)`\endlink with <b>albumartist[n].*</b> or <b>artist[n].*</b> as <b>type</b>
+///   - `ADSP.ActiveStreamType`
+///   - `ADSP.DetectedStreamType`
+///   - `ADSP.MasterName`
+///   - `ADSP.MasterInfo`
+///   - `ADSP.MasterOwnIcon`
+///   - `ADSP.MasterOverrideIcon`
+///   - `ListItem.ChannelNumber`, `ListItem.SubChannelNumber`, `MusicPlayer.ChannelNumber`,
+/// `MusicPlayer.SubChannelNumber`, `VideoPlayer.ChannelNumber`,
+/// `VideoPlayer.SubChannelNumber`. Please use the following alternatives
+/// \link ListItem_ChannelNumberLabel `ListItem.ChannelNumberLabel` \endlink,
+/// \link MusicPlayer_ChannelNumberLabel `MusicPlayer.ChannelNumberLabel` \endlink
+/// \link VideoPlayer_ChannelNumberLabel `VideoPlayer.ChannelNumberLabel` \endlink from now on.
+///
+/// @skinning_v18 **[Removed Boolean Conditions]** The following infobools have been removed:
+///   - `System.HasModalDialog`  - use \link System_HasActiveModalDialog `System.HasActiveModalDialog` \endlink and
+///  \link System_HasVisibleModalDialog `System.HasVisibleModalDialog`\endlink instead
+///   - `StringCompare()` - use \link String_IsEqual `String.IsEqual(info,string)`\endlink instead
+///   - `SubString()` - use \link String_Contains `String.Contains(info,substring)`\endlink instead
+///   - `IntegerGreaterThan()` - use \link Integer_IsGreater `Integer.IsGreater(info,number)`\endlink instead
+///   - `IsEmpty()` - use \link String_IsEmpty `String.IsEmpty(info)`\endlink instead
+///   - `System.HasADSP`
+///   - `ADSP.IsActive`
+///   - `ADSP.HasInputResample`
+///   - `ADSP.HasPreProcess`
+///   - `ADSP.HasMasterProcess`
+///   - `ADSP.HasPostProcess`
+///   - `ADSP.HasOutputResample`
+///   - `ADSP.MasterActive`
+///
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v17 Kodi v17 (Krypton)
+///
+/// @skinning_v17 **[Removed Infolabels]** The following infolabels have been removed:
+///   - `ListItem.StarRating` - use the other ratings instead.
+///
+/// @skinning_v17 **[Removed Boolean Conditions]** The following infobools have been removed:
+///   - `on`  - use `true` instead
+///   - `off`  - use `false` instead
+///   - `Player.ShowCodec`
+///   - `System.GetBool(pvrmanager.enabled)`
+///
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v16 Kodi v16 (Jarvis)
+///
+///  @skinning_v16 **[New Boolean Conditions]** The following infobools were added:
+///    - `System.HasADSP`
+///    - `ADSP.IsActive`
+///    - `ADSP.HasInputResample`
+///    - `ADSP.HasPreProcess`
+///    - `ADSP.HasMasterProcess`
+///    - `ADSP.HasPostProcess`
+///    - `ADSP.HasOutputResample`
+///    - `ADSP.MasterActive`
+///    - `System.HasModalDialog`
+///
+///  @skinning_v16 **[New Infolabels]** The following infolabels were added:
+///    - `ADSP.ActiveStreamType`
+///    - `ADSP.DetectedStreamType`
+///    - `ADSP.MasterName`
+///    - `ADSP.MasterInfo`
+///    - `ADSP.MasterOwnIcon`
+///    - `ADSP.MasterOverrideIcon`
+///
+///   @skinning_v16 **[Removed Boolean Conditions]** The following infobols were removed:
+///    - `System.Platform.ATV2`
+
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v15 Kodi v15 (Isengard)
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v14 Kodi v14 (Helix)
+///  @skinning_v14 **[New Infolabels]** The following infolabels were added:
+///    - `ListItem.SubChannelNumber`
+///    - `MusicPlayer.SubChannelNumber`
+///    - `VideoPlayer.SubChannelNumber`
+///
+/// <hr>
+/// \subsection modules_rm_infolabels_booleans_v13 XBMC v13 (Gotham)
+///   @skinning_v13 **[Removed Infolabels]** The following infolabels were removed:
+///    - `Network.SubnetAddress`
+///
+/// <hr>
+// Crazy part, to use tableofcontents must it be on end
+/// \page modules__infolabels_boolean_conditions
+/// \tableofcontents
 
 
 CGUIInfoManager::Property::Property(const std::string &property, const std::string &parameters)
