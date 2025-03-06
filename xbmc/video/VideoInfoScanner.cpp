@@ -1067,7 +1067,7 @@ CVideoInfoScanner::~CVideoInfoScanner()
     // If found VIDEO_TS.IFO or INDEX.BDMV then we are dealing with Blu-ray or DVD files on disc
     // somewhere in the directory tree. Assume that all other files/folders in the same folder
     // with VIDEO_TS or BDMV can be ignored.
-    // THere can be a BACKUP/INDEX.BDMV which needs to be ignored (and broke the old while loop here)
+    // There can be a BACKUP/INDEX.BDMV which needs to be ignored (and broke the old while loop here)
 
     // Get folders to remove
     std::vector<std::string> foldersToRemove;

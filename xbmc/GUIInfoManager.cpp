@@ -139,6 +139,62 @@ typedef struct
 /// -----------------------------------------------------------------------------
 
 /// \page modules__infolabels_boolean_conditions
+/// \subsection modules__infolabels_boolean_conditions_Game Game
+/// \table_start
+///   \table_h3{ Labels, Type, Description }
+///   \table_row3{   <b>`Game.Title`</b>,
+///                  \anchor Game_Title
+///                  _string_,
+///     @return the name of the game.
+///     <p>
+///   }
+///   \table_row3{   <b>`Game.Platform`</b>,
+///                  \anchor Game_Platform
+///                  _string_,
+///     @return the platform the game runs on (e.g. Atari 2600).
+///     <p>
+///   }
+///   \table_row3{   <b>`Game.Genres`</b>,
+///                  \anchor Game_Genres
+///                  _string_,
+///     @return the genre of the game (e.g. Action).
+///     <p>
+///   }
+///   \table_row3{   <b>`Game.Publisher`</b>,
+///                  \anchor Game_Publisher
+///                  _string_,
+///     @return the publishing company of the game (e.g. Nintendo).
+///     <p>
+///   }
+///   \table_row3{   <b>`Game.Developer`</b>,
+///                  \anchor Game_Developer
+///                  _string_,
+///     @return the developer of the game.
+///     <p>
+///   }
+///   \table_row3{   <b>`Game.Overview`</b>,
+///                  \anchor Game_Overview
+///                  _string_,
+///     @return the game description.
+///     <p>
+///   }
+///   \table_row3{   <b>`Game.Year`</b>,
+///                  \anchor Game_Year
+///                  _string_,
+///     @return the year the game was released.
+///     <p>
+///   }
+///   \table_row3{   <b>`Game.GameClient`</b>,
+///                  \anchor Game_GameClient
+///                  _string_,
+///     @return the name of the used emulator.
+///     <p>
+///   }
+/// \table_end
+///
+/// -----------------------------------------------------------------------------
+
+/// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Addon Addon
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
@@ -167,8 +223,8 @@ typedef struct
 ///   \table_row3{   <b>`Addon.SettingInt(addon_id\,setting_id)`</b>,
 ///                  \anchor Addon_SettingInt
 ///                  _integer_,
-///     @return The integer value of the setting `setting_id` belong to the addon with the id `addon_id`.
-///     @note The provided setting with `setting_id` must be an integer setting type. Otherwise it will return the integer info
+///     @return The integer value of the setting `setting_id` belonging to the addon with the id `addon_id`.
+///     @note The provided setting with `setting_id` must be an integer setting type otherwise it will return the integer info
 ///     default value (which is 0).
 ///     @param addon_id - the id of the addon
 ///     @param setting_id - the addon setting
@@ -773,7 +829,7 @@ const infomap integer_bools[] =  {{ "isequal",          INTEGER_IS_EQUAL },
 ///                  \anchor Player_HasPrograms
 ///                  _boolean_,
 ///     @return **True** if the media file being played has programs\, i.e. groups of streams.
-///     @note Ex: if a media file has multiple streams (quality\, channels\, etc) a program represents
+///     @note Ex: if a media file has multiple streams (e.g. quality\, channels\, etc) a program represents
 ///     a particular stream combo.
 ///     <p>
 ///   }
@@ -920,7 +976,7 @@ const infomap player_labels[] = {{"hasmedia", PLAYER_HAS_MEDIA},
 ///                  \anchor Player_Art_type
 ///                  _string_,
 ///     @return The Image for the defined art type for the current playing ListItem.
-///     @param type - The art type. The type is defined by scripts and scrappers and can have any value.
+///     @param type - the art type. The type is defined by scripts and scrappers and can have any value.
 ///     Common example values for type are:
 ///       - fanart
 ///       - thumb
@@ -958,7 +1014,7 @@ const infomap player_param[] = {{"art", PLAYER_ITEM_ART},
 ///                  \anchor Player_SeekOffset_format
 ///                  _string_,
 ///     @return The seek offset after a seek press in a given format.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///     @note **Example:** user presses BigStepForward\, player.seekoffset returns +10:00
@@ -977,7 +1033,7 @@ const infomap player_param[] = {{"art", PLAYER_ITEM_ART},
 ///                  \anchor Player_TimeRemaining_format
 ///                  _string_,
 ///     @return The remaining time of current playing media in a given format.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -991,7 +1047,7 @@ const infomap player_param[] = {{"art", PLAYER_ITEM_ART},
 ///                  \anchor Player_Time_format
 ///                  _string_,
 ///     @return The elapsed time of current playing media in a given format.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -999,7 +1055,7 @@ const infomap player_param[] = {{"art", PLAYER_ITEM_ART},
 ///                  \anchor Player_Duration_format
 ///                  _string_,
 ///     @return The total duration of the current playing media in a given format.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -1007,7 +1063,7 @@ const infomap player_param[] = {{"art", PLAYER_ITEM_ART},
 ///                  \anchor Player_FinishTime_format
 ///                  _string_,
 ///     @return The time at which the playing media will end (in a specified format).
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -1015,7 +1071,7 @@ const infomap player_param[] = {{"art", PLAYER_ITEM_ART},
 ///                  \anchor Player_StartTime_format
 ///                  _string_,
 ///     @return The time at which the playing media began (in a specified format).
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -1023,7 +1079,7 @@ const infomap player_param[] = {{"art", PLAYER_ITEM_ART},
 ///                  \anchor Player_SeekNumeric_format
 ///                  _string_,
 ///     @return The time at which the playing media began (in a specified format).
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -1229,9 +1285,9 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 ///                  \anchor System_AlarmLessOrEqual
 ///                  _boolean_,
 ///     @return **True** if the alarm with `alarmname` has less or equal to `seconds` left.
-///     @param alarmname - The name of the alarm. It can be one of the following:
+///     @param alarmname - the name of the alarm. It can be one of the following:
 ///       - shutdowntimer
-///     @param seconds - Time in seconds to compare with the alarm trigger event
+///     @param seconds - time in seconds to compare with the alarm trigger event
 ///     @note **Example:** `System.Alarmlessorequal(shutdowntimer\,119)`\,
 ///     will return true when the shutdowntimer has less then 2 minutes
 ///     left.
@@ -1255,9 +1311,9 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 ///                  _boolean_,
 ///     @return **True** if there is an audio CD in the optical drive. **False** if no drive
 ///     available\, empty drive or other medium.
-///   <p><hr>
-///   @skinning_v18 **[New Boolean Condition]** \link System_HasMediaAudioCD
-///   `System.HasMediaAudioCD` \endlink <p>
+///     <p><hr>
+///     @skinning_v18 **[New Boolean Condition]** \link System_HasMediaAudioCD
+///     `System.HasMediaAudioCD` \endlink <p>
 ///   }
 ///   \table_row3{   <b>`System.DVDReady`</b>,
 ///                  \anchor System_DVDReady
@@ -1481,7 +1537,7 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 ///                  \anchor System_Time_format
 ///                  _string_,
 ///     @return The current time in a specified format.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -1489,8 +1545,8 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 ///                  \anchor System_Time
 ///                  _boolean_,
 ///     @return **True** if the current system time is >= `startTime` and < `endTime` (if defined).
-///     @param startTime - Start time
-///     @param endTime - [opt] End time
+///     @param startTime - start time
+///     @param endTime - [opt] end time
 ///     <p>
 ///     @note Time must be specified in the format HH:mm\, using
 ///     a 24 hour clock.
@@ -1528,8 +1584,8 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 ///                  \anchor System_Date
 ///                  _boolean_,
 ///     @return **True** if the current system date is >= `startDate` and < `endDate` (if defined).
-///     @param startDate - The start date
-///     @param endDate - [opt] The end date
+///     @param startDate - the start date
+///     @param endDate - [opt] the end date
 ///     @note Date must be specified in the format MM-DD or YY-MM-DD.
 ///     <p>
 ///   }
@@ -1634,7 +1690,7 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 ///                  _string_,
 ///     @return The Kodi instance name.
 ///     @note It will auto append (%hostname%) in case
-///     the device name was not changed. eg. "Kodi (htpc)"
+///     the device name was not changed. e.g. "Kodi (htpc)"
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`System.FPS`</b>,
@@ -1652,7 +1708,7 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 ///   \table_row3{   <b>`System.ScreenMode`</b>,
 ///                  \anchor System_ScreenMode
 ///                  _string_,
-///     @return The screenmode (eg windowed / fullscreen).
+///     @return The screenmode (e.g. windowed / fullscreen).
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`System.ScreenWidth`</b>,
@@ -1758,7 +1814,7 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 ///                  \anchor System_Locale
 ///                  _string_,
 ///     @return Locale-specific information depending on the requested type.
-///     @param type - Can be one of the following:
+///     @param type - can be one of the following:
 ///       - <b>region</b> The currently selected region name within the selected language ( \link System_Language `System.Language` \endlink).
 ///       - <b>iso</b> The country code of the currently selected region as specified in <a href="https://kodi.wiki/view/Language_support#What_is_langinfo.xml">langinfo.xml</a>.
 ///     <p><hr>
@@ -1827,7 +1883,7 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 ///                  \anchor System_Memory
 ///                  _string_,
 ///     @return The memory value depending on the requested type.
-///     @param type - Can be one of the following:
+///     @param type - can be one of the following:
 ///       - <b>free</b>
 ///       - <b>free.percent</b>
 ///       - <b>used</b>
@@ -1994,7 +2050,7 @@ const infomap system_labels[] = {
 ///                  \anchor System_AddonIsEnabled
 ///                  _boolean_,
 ///     @return **True** if the specified addon is enabled on the system.
-///     @param id - The addon Id
+///     @param id - the addon Id
 ///     <p><hr>
 ///     @skinning_v19 **[New Boolean Condition]** \link System_AddonIsEnabled `System.AddonIsEnabled(id)`\endlink
 ///     <p>
@@ -2065,7 +2121,7 @@ const infomap system_param[] =   {{ "hasalarm",         SYSTEM_HAS_ALARM },
 ///   \table_row3{   <b>`Network.LinkState`</b>,
 ///                  \anchor Network_LinkState
 ///                  _string_,
-///     @return The network linkstate e.g. 10mbit/100mbit etc.
+///     @return The network linkstate (e.g. 10mbit/100mbit\, etc).
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Network.MacAddress`</b>,
@@ -2100,7 +2156,6 @@ const infomap system_param[] =   {{ "hasalarm",         SYSTEM_HAS_ALARM },
 ///   }
 /// \table_end
 ///
-/// -----------------------------------------------------------------------------
 // clang-format off
 const infomap network_labels[] = {
     {"isdhcp", NETWORK_IS_DHCP},
@@ -2162,7 +2217,6 @@ const infomap network_labels[] = {
 ///   }
 /// \table_end
 ///
-/// -----------------------------------------------------------------------------
 const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
                                   { "songsplayed",       MUSICPM_SONGSPLAYED },
                                   { "matchingsongs",     MUSICPM_MATCHINGSONGS },
@@ -2309,10 +2363,10 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  \anchor MusicPlayer_Property_Role_Mixer
 ///                  _string_,
 ///     @return The name of the dj who remixed the selected song.
-///     @todo So maybe rather than a row each have one entry for Role.XXXXX with composer\, arranger etc. as listed values
+///     @todo So maybe rather than a row each have one entry for Role.XXXXX with composer\, arranger\, etc. as listed values
 ///     @note MusicPlayer.Property(Role.any_custom_role) also works\,
 ///     where any_custom_role could be an instrument violin or some other production activity e.g. sound engineer.
-///     The roles listed (composer\, arranger etc.) are standard ones but there are many possible.
+///     The roles listed (e.g. composer\, arranger\, etc) are standard ones but there are many possible.
 ///     Music file tagging allows for the musicians and all other people involved in the recording to be added\, Kodi
 ///     will gathers and stores that data\, and it is available to GUI.
 ///     <p><hr>
@@ -2404,7 +2458,7 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  \anchor MusicPlayer_Property_Artist_Type
 ///                  _string_,
 ///     @return The type of the currently playing Artist - person\,
-///     group\, orchestra\, choir etc.
+///     group\, orchestra\, choir\, etc.
 ///     <p><hr>
 ///     @skinning_v18 **[New Infolabel]** \link MusicPlayer_Property_Artist_Type `MusicPlayer.Property(Artist_Type)`\endlink
 ///     <p>
@@ -2604,7 +2658,7 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  _string_,
 ///     @return The Disc Number of current song stored in ID tag info for the
 ///     song with an offset `number` with respect to the playing song.
-///     @param number - The offset value for the song with respect to the
+///     @param number - the offset value for the song with respect to the
 ///     playing song.
 ///     <p>
 ///   }
@@ -2613,7 +2667,7 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  _string_,
 ///     @return The Disc Number of current song stored in ID tag info for the
 ///     song with an offset `number` with respect to the start of the playlist.
-///     @param number - The offset value for the song with respect to the
+///     @param number - the offset value for the song with respect to the
 ///     start of the playlist.
 ///     <p>
 ///   }
@@ -2628,7 +2682,7 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  _string_,
 ///     @return The Comment of current song stored in ID tag info for the
 ///     song with an offset `number` with respect to the playing song.
-///     @param number - The offset value for the song with respect to the
+///     @param number - the offset value for the song with respect to the
 ///     playing song.
 ///     <p>
 ///   }
@@ -2637,7 +2691,7 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  _string_,
 ///     @return The Comment of current song stored in ID tag info for the
 ///     song with an offset `number` with respect to the start of the playlist.
-///     @param number - The offset value for the song with respect to the
+///     @param number - the offset value for the song with respect to the
 ///     start of the playlist.
 ///     <p>
 ///   }
@@ -2675,8 +2729,8 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  \anchor MusicPlayer_Exists
 ///                  _boolean_,
 ///     @return **True** if the currently playing playlist has a song queued at the given position.
-///     @param relative - bool - If the position is relative
-///     @param position - int - The position of the song
+///     @param relative - bool - if the position is relative
+///     @param position - int - the position of the song
 ///     @note It is possible to define whether the position is relative or not\, default is false.
 ///     <p>
 ///   }
@@ -2715,7 +2769,7 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  _string_,
 ///     @return The track number of the song with an offset `number`
 ///     with respect to the current playing song.
-///     @param number - The offset number of the song with respect to the
+///     @param number - the offset number of the song with respect to the
 ///     playing song
 ///     <p>
 ///   }
@@ -2724,7 +2778,7 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  _string_,
 ///     @return The track number of the song with an offset `number`
 ///     with respect to start of the playlist.
-///     @param number - The offset number of the song with respect
+///     @param number - the offset number of the song with respect
 ///     to start of the playlist
 ///     <p>
 ///   }
@@ -2827,7 +2881,7 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 ///                  \anchor MusicPlayer_Property_Propname
 ///                  _string_,
 ///     @return The requested property value of the currently playing item.
-///     @param propname - The requested property
+///     @param propname - the requested property
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`MusicPlayer.DBID`</b>,
@@ -2965,7 +3019,7 @@ const infomap musicplayer[] =    {{ "title",            MUSICPLAYER_TITLE },
 ///     @return **True** if the video player is using the hardware overlays render
 ///     method.
 ///     @note This is useful\, as with hardware overlays you have no alpha blending to
-///     the video image\, so shadows etc. need redoing\, or disabling.
+///     the video image\, so shadows\, etc. need redoing\, or disabling.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`VideoPlayer.IsFullscreen`</b>,
@@ -2984,7 +3038,7 @@ const infomap musicplayer[] =    {{ "title",            MUSICPLAYER_TITLE },
 ///                  \anchor VideoPlayer_HasInfo
 ///                  _boolean_,
 ///     @return **True** if the current playing video has information from the
-///     library or from a plugin (eg director/plot etc.)
+///     library or from a plugin (e.g. director\, plot\, etc).
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`VideoPlayer.HasVideoVersions`</b>,
@@ -3418,7 +3472,7 @@ const infomap musicplayer[] =    {{ "title",            MUSICPLAYER_TITLE },
 ///                  \anchor VideoPlayer_art
 ///                  _string_,
 ///     @return The art path for the requested arttype and for the currently playing video.
-///     @param type - can virtually be anything\, refers to the art type keyword in the art map (poster\, fanart\, banner\, thumb\, etc)
+///     @param type - can virtually be anything\, refers to the art type keyword in the art map (e.g. poster\, fanart\, banner\, thumb\, etc).
 ///     <p><hr>
 ///     @skinning_v20 **[New Infolabel]** \link VideoPlayer_art `VideoPlayer.Art(type)`\endlink
 ///     <p>
@@ -3428,7 +3482,7 @@ const infomap musicplayer[] =    {{ "title",            MUSICPLAYER_TITLE },
 ///                  _string_,
 ///     @return The art path for the requested arttype and for the video which has an offset `number` with respect to the currently playing video.
 ///     @param number - the offset with respect to the start of the playlist
-///     @param type - can virtually be anything\, refers to the art type keyword in the art map (poster\, fanart\, banner\, thumb\, etc)
+///     @param type - can virtually be anything\, refers to the art type keyword in the art map (e.g. poster\, fanart\, banner\, thumb\, etc).
 ///     <p><hr>
 ///     @skinning_v20 **[New Infolabel]** \link VideoPlayer_Offset_mpaa `VideoPlayer.offset(number).Art(type)`\endlink
 ///     <p>
@@ -3438,7 +3492,7 @@ const infomap musicplayer[] =    {{ "title",            MUSICPLAYER_TITLE },
 ///                  _string_,
 ///     @return The art path for the requested arttype and for the video which has an offset `number` with respect to the start of the playlist.
 ///     @param number - the offset with respect to the start of the playlist
-///     @param type - can virtually be anything\, refers to the art type keyword in the art map (poster\, fanart\, banner\, thumb\, etc)
+///     @param type - can virtually be anything\, refers to the art type keyword in the art map (e.g. poster\, fanart\, banner\, thumb\, etc).
 ///     <p><hr>
 ///     @skinning_v20 **[New Infolabel]** \link VideoPlayer_position_art `VideoPlayer.position(number).Art(type)`\endlink
 ///     <p>
@@ -3975,7 +4029,7 @@ const infomap musicplayer[] =    {{ "title",            MUSICPLAYER_TITLE },
 ///   \table_row3{   <b>`VideoPlayer.ParentalRatingCode`</b>,
 ///                  \anchor VideoPlayer_ParentalRatingCode
 ///                  _string_,
-///     @return The parental rating code (eg: 'PG'\, etc) of the currently playing programme (PVR).
+///     @return The parental rating code (e.g. 'PG'\, etc) of the currently playing programme (PVR).
 ///     <p><hr>
 ///     @skinning_v22 **[New Infolabel]** \link VideoPlayer_ParentalRatingCode `VideoPlayer.ParentalRatingCode`\endlink
 ///     <p>
@@ -4289,7 +4343,7 @@ const infomap retroplayer[] =
 ///   \table_row3{   <b>`Container.Viewmode`</b>,
 ///                  \anchor Container_Viewmode
 ///                  _string_,
-///     @return The current viewmode (list\, icons etc).
+///     @return The current viewmode (e.g. list\, icons\, etc).
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container.ViewCount`</b>,
@@ -4306,20 +4360,20 @@ const infomap retroplayer[] =
 ///     @return The total time of all items in the current container.
 ///     <p>
 ///   }
-///   \table_row3{   <b>`Container.TotalWatched`</b>,
+///   \table_row3{   <b>`Container(id).TotalWatched`</b>,
 ///                  \anchor Container_TotalWatched
 ///                  _string_,
 ///     @return The number of watched items in the container.
-///     @param id - [opt] if not supplied the current container will be used.
+///     @note If no id is specified it grabs the current container.
 ///     <p><hr>
 ///     @skinning_v16 **[New Infolabel]** \link Container_TotalWatched `Container(id).TotalWatched`\endlink
 ///     <p>
 ///   }
-///   \table_row3{   <b>`Container.TotalUnWatched`</b>,
+///   \table_row3{   <b>`Container(id).TotalUnWatched`</b>,
 ///                  \anchor Container_TotalUnWatched
 ///                  _string_,
 ///     @return The number of unwatched items in the container.
-///     @param id - [opt] if not supplied the current container will be used.
+///     @note If no id is specified it grabs the current container.
 ///     <p><hr>
 ///     @skinning_v16 **[New Infolabel]** \link Container_TotalUnWatched `Container(id).TotalUnWatched`\endlink
 ///     <p>
@@ -4399,7 +4453,8 @@ const infomap mediacontainer[] = {{ "hasfiles",         CONTAINER_HASFILES },
 ///                  _boolean_,
 ///     @return **True** if the container with id (or current container if id is
 ///     omitted) is moving to the next item. Allows views to be
-///     custom-designed (such as 3D coverviews etc.)
+///     custom-designed\, such as 3D cover views\, etc.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).OnScrollNext`</b>,
@@ -4408,6 +4463,7 @@ const infomap mediacontainer[] = {{ "hasfiles",         CONTAINER_HASFILES },
 ///     @return **True** if the container with id (or current container if id is
 ///     omitted) is scrolling to the next item. Differs from \ref Container_OnNext "OnNext" in that
 ///     \ref Container_OnNext "OnNext" triggers on movement even if there is no scroll involved.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).OnPrevious`</b>,
@@ -4415,7 +4471,8 @@ const infomap mediacontainer[] = {{ "hasfiles",         CONTAINER_HASFILES },
 ///                  _boolean_,
 ///     @return **True** if the container with id (or current container if id is
 ///     omitted) is moving to the previous item. Allows views to be
-///     custom-designed (such as 3D coverviews etc).
+///     custom-designed\, such as 3D cover views\, etc.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).OnScrollPrevious`</b>,
@@ -4431,6 +4488,7 @@ const infomap mediacontainer[] = {{ "hasfiles",         CONTAINER_HASFILES },
 ///                  _integer_,
 ///     @return The number of pages in the container with given id. If no id is specified it
 ///     grabs the current container.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).NumItems`</b>,
@@ -4452,9 +4510,8 @@ const infomap mediacontainer[] = {{ "hasfiles",         CONTAINER_HASFILES },
 ///   \table_row3{   <b>`Container(id).NumNonFolderItems`</b>,
 ///                  \anchor Container_NumNonFolderItems
 ///                  _integer_,
-///     @return The Number of items in the container or grouplist with given id excluding all folder items.
-///     @note **Example:** pvr recordings folders\, parent ".." folder).
-///     If no id is specified it grabs the current container.
+///     @return The number of items in the container or grouplist with given id excluding all folder items (e.g. pvr recordings folders\, parent ".." folder\, "All albums"\, etc).
+///     @note If no id is specified it grabs the current container.
 ///     <p><hr>
 ///     @skinning_v18 **[New Infolabel]** \link Container_NumNonFolderItems `Container(id).NumNonFolderItems`\endlink
 ///     <p>
@@ -4462,7 +4519,7 @@ const infomap mediacontainer[] = {{ "hasfiles",         CONTAINER_HASFILES },
 ///   \table_row3{   <b>`Container(id).CurrentPage`</b>,
 ///                  \anchor Container_CurrentPage
 ///                  _string_,
-///     @return THe current page in the container with given id.
+///     @return The current page in the container with given id.
 ///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
@@ -4479,7 +4536,8 @@ const infomap mediacontainer[] = {{ "hasfiles",         CONTAINER_HASFILES },
 ///                  \anchor Container_Scrolling
 ///                  _boolean_,
 ///     @return **True** if the user is currently scrolling through the container
-///     with id (or current container if id is omitted).
+///     with id.
+///     @note If no id is specified it grabs the current container.
 ///     @note This is slightly delayed from the actual scroll start. Use
 ///     \ref Container_OnScrollNext "Container(id).OnScrollNext" or
 ///     \ref Container_OnScrollPrevious "Container(id).OnScrollPrevious" to trigger animations
@@ -4490,6 +4548,7 @@ const infomap mediacontainer[] = {{ "hasfiles",         CONTAINER_HASFILES },
 ///                  \anchor Container_HasNext
 ///                  _boolean_,
 ///     @return **True** if the container or textbox with id (id) has a next page.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).HasParent`</b>,
@@ -4505,12 +4564,14 @@ const infomap mediacontainer[] = {{ "hasfiles",         CONTAINER_HASFILES },
 ///                  \anchor Container_HasPrevious
 ///                  _boolean_,
 ///     @return **True** if the container or textbox with id (id) has a previous page.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).IsUpdating`</b>,
 ///                  \anchor Container_IsUpdating
 ///                  _boolean_,
 ///     @return **True** if the container with dynamic list content is currently updating.
+///     @note If no id is specified it grabs the current container.
 ///   }
 const infomap container_bools[] ={{ "onnext",           CONTAINER_MOVE_NEXT },
                                   { "onprevious",       CONTAINER_MOVE_PREVIOUS },
@@ -4533,6 +4594,7 @@ const infomap container_bools[] ={{ "onnext",           CONTAINER_MOVE_NEXT },
 ///                  \anchor Container_Row
 ///                  _integer_,
 ///     @return The row number of the focused position in a panel container.
+///     @note If no id is specified it grabs the current container.
 ///     <p><hr>
 ///     @skinning_v16 **[New Infolabel]** \link Container_Row `Container(id).Row`\endlink
 ///     <p>
@@ -4541,12 +4603,14 @@ const infomap container_bools[] ={{ "onnext",           CONTAINER_MOVE_NEXT },
 ///                  \anchor Container_Row_parameter
 ///                  _boolean_,
 ///     @return **True** if the row number of the focused position matches the specified parameter.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).Column`</b>,
 ///                  \anchor Container_Column
 ///                  _integer_,
 ///     @return The column number of the focused position in a panel container.
+///     @note If no id is specified it grabs the current container.
 ///     <p><hr>
 ///     @skinning_v16 **[New Infolabel]** \link Container_Column `Container(id).Column`\endlink
 ///     <p>
@@ -4555,6 +4619,7 @@ const infomap container_bools[] ={{ "onnext",           CONTAINER_MOVE_NEXT },
 ///                  \anchor Container_Column_parameter
 ///                  _boolean_,
 ///     @return **True** if the column number of the focused position matches the specified parameter.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).Position`</b>,
@@ -4562,6 +4627,7 @@ const infomap container_bools[] ={{ "onnext",           CONTAINER_MOVE_NEXT },
 ///                  _integer_,
 ///     @return The current focused position of container / grouplist (id) as a
 ///     numeric label.
+///     @note If no id is specified it grabs the current container.
 ///     <p><hr>
 ///     @skinning_v16 **[Infolabel Updated]** \link Container_Position `Container(id).Position`\endlink
 ///     now also returns the position for items inside a grouplist.
@@ -4570,22 +4636,24 @@ const infomap container_bools[] ={{ "onnext",           CONTAINER_MOVE_NEXT },
 ///   \table_row3{   <b>`Container(id).Position(parameter)`</b>,
 ///                  \anchor Container_Position_parameter
 ///                  _boolean_,
-///     @return **True** if the container with id (or current container if id is omitted) is focused on the specified position.
+///     @return **True** if the container with id is focused on the specified position.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).SubItem(item_number)`</b>,
 ///                  \anchor Container_SubItem
 ///                  _boolean_,
-///     @return **True** if the container with id (or current container if id is omitted) is focused on the specified subitem.
+///     @return **True** if the container with id is focused on the specified subitem.
 ///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container(id).HasFocus(item_number)`</b>,
 ///                  \anchor Container_HasFocus
 ///                  _boolean_,
-///     @return **True** if the container with id (or current container if id is
-///     omitted) has static content and is focused on the item with id
+///     @return **True** if the container with id
+///     has static content and is focused on the item with id
 ///     item_number.
+///     @note If no id is specified it grabs the current container.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container.SortMethod`</b>,
@@ -4633,8 +4701,9 @@ const infomap container_ints[] = {{ "row",              CONTAINER_ROW },
 ///                  \anchor Container_ListItem_property
 ///                  _string_,
 ///     @return the property of the ListItem with a given offset.
-///     @param offset - The offset for the listitem.
-///     @note `Property` has to be replaced with `Label`\, `Label2`\, `Icon` etc.
+///     @param offset - the offset for the listitem.
+///     @note If no id is specified it grabs the current container.
+///     @note `Property` has to be replaced with `Label`\, `Label2`\, `Icon`\, etc.
 ///     @note **Example:** `Container(50).Listitem(2).Label `
 ///     <p>
 ///   }
@@ -4643,10 +4712,11 @@ const infomap container_ints[] = {{ "row",              CONTAINER_ROW },
 ///                  _string_,
 ///     @return the same as \link Container_ListItem_property `Container(id).ListItem(offset).Property` \endlink
 ///     but it won't wrap.
-///     @param offset - The offset for the listitem.
-///     @note That means if the last item of a list is focused\, `ListItemNoWrap(1)`
+///     That means if the last item of a list is focused\, `ListItemNoWrap(1)`
 ///     will be empty while `ListItem(1)` will return the first item of the list.
-///     `Property` has to be replaced with `Label`\, `Label2`\, `Icon` etc.
+///     @param offset - the offset for the listitem.
+///     @note If no id is specified it grabs the current container.
+///     @note `Property` has to be replaced with `Label`\, `Label2`\, `Icon`\, etc.
 ///     @note **Example:** `Container(50).ListitemNoWrap(1).Plot`
 ///     <p>
 ///   }
@@ -4655,6 +4725,7 @@ const infomap container_ints[] = {{ "row",              CONTAINER_ROW },
 ///                  _string_,
 ///     @return The infolabel for an item in a Container.
 ///     @param x - the position in the container relative to the cursor position.
+///     @note If no id is specified it grabs the current container.
 ///     @note **Example:** `Container(50).ListItemPosition(4).Genre`
 ///     <p>
 ///   }
@@ -4663,6 +4734,7 @@ const infomap container_ints[] = {{ "row",              CONTAINER_ROW },
 ///                  _string_,
 ///     @return The infolabel for an item in a Container.
 ///     @param x - the absolute position in the container.
+///     @note If no id is specified it grabs the current container.
 ///     @note **Example:** `Container(50).ListItemAbsolute(4).Genre`
 ///     <p><hr>
 ///     @skinning_v16 **[New Infolabel]** \link Container_ListItemAbsolute `Container(id).ListItemAbsolute(x).[infolabel]`\endlink
@@ -4690,10 +4762,10 @@ const infomap container_ints[] = {{ "row",              CONTAINER_ROW },
 ///       - <b>directors</b>
 ///       - <b>sets</b>
 ///       - <b>tags</b>
+///       - <b>addons</b>
+///       - <b>livetv</b>
 ///     @note These currently only work in the Video and Music
-///     Library or unless a Plugin has set the value) also available are
-///     Addons true when a list of add-ons is shown LiveTV true when a
-///     htsp (tvheadend) directory is shown
+///     Library\, unless a Plugin has set the value.
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Container.Art(type)`</b>,
@@ -4714,13 +4786,16 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
                                   { "art",              CONTAINER_ART }};
 
 /// \page modules__infolabels_boolean_conditions
-///   \table_row3{   <b>`Container.SortDirection(direction)`</b>,
+///   \table_row3{   <b>`Container.SortDirection(ascending)`</b>,
 ///                  \anchor Container_SortDirection
 ///                  _boolean_,
-///     @return **True** if the sort direction of a container equals direction.
-///     @param direction - The direction to check. It can be:
-///       - <b>ascending</b>
-///       - <b>descending</b>
+///     @return **True** if the sort direction of a container is ascending.
+///     <p>
+///   }
+///   \table_row3{   <b>`Container.SortDirection(descending)`</b>,
+///                  \anchor Container_SortDirection
+///                  _boolean_,
+///     @return **True** if the sort direction of a container is descending.
 ///     <p>
 ///   }
 /// \table_end
@@ -4736,8 +4811,10 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 ///                  _string_,
 ///     @return The thumbnail (if it exists) of the currently selected item
 ///     in a list or thumb control.
-///     @deprecated but still available\, returns
-///     the same as \ref ListItem_Art_Type "ListItem.Art(thumb)"
+///     <p>
+///     @deprecated \link ListItem_Thumb `ListItem.Thumb`\endlink is deprecated but still available\, use \ref ListItem_Art_Type "ListItem.Art(thumb)" instead
+///     <p><hr>
+///     @skinning_v19 **[New Infolabel]** \link ListItem_Thumb `ListItem.Thumb`\endlink
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`ListItem.Icon`</b>,
@@ -4998,7 +5075,7 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 ///   \table_row3{   <b>`ListItem.Property(Artist_Type)`</b>,
 ///                  \anchor ListItem_Property_Artist_Type
 ///                  _string_,
-///     @return The type of the currently selected Artist - person\, group\, orchestra\, choir etc.
+///     @return The type of the currently selected Artist - person\, group\, orchestra\, choir\, etc.
 ///     <p><hr>
 ///     @skinning_v18 **[New Infolabel]** \link ListItem_Property_Artist_Type `ListItem.Property(Artist_Type)`\endlink
 ///     <p>
@@ -6019,7 +6096,7 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 ///                  _string_,
 ///     @return The duration of the currently selected item in a container in
 ///     different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -6499,7 +6576,7 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 ///                  \anchor ListItem_NextDuration_format
 ///                  _string_,
 ///     @return The duration of the next item (PVR) in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p><hr>
 ///     @skinning_v18 **[New Infolabel]** \link ListItem_NextDuration_format `ListItem.NextDuration(format)`\endlink
@@ -6692,7 +6769,8 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 ///                  \anchor ListItem_AddonBroken
 ///                  _string_,
 ///     @return A message when the addon is marked as broken in the repo.
-///     @deprecated but still available\, use \ref ListItem_AddonLifecycleDesc "ListItem.AddonLifecycleDesc"
+///     <p>
+///     @deprecated \link ListItem_AddonBroken `ListItem.AddonBroken`\endlink is deprecated but still available\, use \ref ListItem_AddonLifecycleDesc "ListItem.AddonLifecycleDesc"
 ///     instead
 ///     <p><hr>
 ///     @skinning_v17 **[Infolabel Updated]** \link ListItem_AddonBroken `ListItem.AddonBroken`\endlink
@@ -6723,7 +6801,7 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 ///   \table_row3{   <b>`ListItem.AddonType`</b>,
 ///                  \anchor ListItem_AddonType
 ///                  _string_,
-///     @return The type (screensaver\, script\, skin\, etc...) of the currently selected addon.
+///     @return The type (e.g. screensaver\, script\, skin\, etc) of the currently selected addon.
 ///     <p><hr>
 ///     @skinning_v17 **[Infolabel Updated]** \link ListItem_AddonType `ListItem.AddonType`\endlink
 ///     replaces `ListItem.Property(Addon.Type)`.
@@ -7000,7 +7078,7 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 ///   \table_row3{   <b>`ListItem.ParentalRatingCode`</b>,
 ///                  \anchor ListItem_ParentalRatingCode
 ///                  _string_,
-///     @return The parental rating code (eg: 'PG'\, etc) of the list item (PVR).
+///     @return The parental rating code (e.g. 'PG'\, etc) of the list item (PVR).
 ///     <p><hr>
 ///     @skinning_v21 **[New Infolabel]** \link ListItem_ParentalRatingCode `ListItem.ParentalRatingCode`\endlink
 ///     <p>
@@ -7133,7 +7211,7 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 ///   \table_row3{   <b>`ListItem.SampleRate`</b>,
 ///                  \anchor ListItem_SampleRate
 ///                  _string_,
-///     @return The sample rate of a song / 1000.0 eg 44.1\, 48\, 96 etc.
+///     @return The sample rate of a song / 1000.0 (e.g. 44.1\, 48\, 96\, etc).
 ///     <p><hr>
 ///     @skinning_v19 **[New Infolabel]** \link ListItem_SampleRate `ListItem.SampleRate`\endlink
 ///     <p>
@@ -7157,7 +7235,7 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 ///   \table_row3{   <b>`ListItem.AlbumStatus`</b>,
 ///                  \anchor ListItem_AlbumStatus
 ///                  _string_,
-///     @return The Musicbrainz release status of the album (official\, bootleg\, promotion etc)
+///     @return The Musicbrainz release status of the album (e.g. official\, bootleg\, promotion\, etc).
 ///     <p><hr>
 ///     @skinning_v19 **[New Infolabel]** \link ListItem_AlbumStatus `ListItem.AlbumStatus`\endlink
 ///   }
@@ -7730,7 +7808,10 @@ const infomap skin_labels[] =    {{ "currenttheme",      SKIN_THEME },
 ///     window stack.
 ///     @param window - the id or name of the window
 ///     @note Excludes fade out time on dialogs
-///     @deprecated use  \ref Window_IsDialogTopmost "Window.IsDialogTopmost(dialog)" instead
+///     <p>
+///     @deprecated \link Window_IsTopmost `Window.IsTopmost(window)`\endlink is deprecated use \ref Window_IsDialogTopmost "Window.IsDialogTopmost(dialog)" instead
+///     <p><hr>
+///     @skinning_v18 **[New Boolean Condition]** \link Window_IsTopmost `Window.IsTopmost(window)`\endlink
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Window.IsDialogTopmost(dialog)`</b>,
@@ -7801,7 +7882,7 @@ const infomap skin_labels[] =    {{ "currenttheme",      SKIN_THEME },
 ///                  \anchor Window_Weather_Property
 ///                  _string_,
 ///     @return The property for the weather window.
-///     @param property - The requested property. The following are available:
+///     @param property - the requested property. The following are available:
 ///        - Current.ConditionIcon
 ///        - Day[0-6].OutlookIcon
 ///        - Current.FanartCode
@@ -7849,29 +7930,29 @@ const infomap window_bools[] =   {{ "ismedia",          WINDOW_IS_MEDIA },
 ///                  \anchor Control_HasFocus
 ///                  _boolean_,
 ///     @return **True** if the currently focused control has id "id".
-///     @param id - The id of the control
+///     @param id - the id of the control
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Control.IsVisible(id)`</b>,
 ///                  \anchor Control_IsVisible
 ///                  _boolean_,
 ///     @return **True** if the control with id "id" is visible.
-///     @param id - The id of the control
+///     @param id - the id of the control
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Control.IsEnabled(id)`</b>,
 ///                  \anchor Control_IsEnabled
 ///                  _boolean_,
 ///     @return **True** if the control with id "id" is enabled.
-///     @param id - The id of the control
+///     @param id - the id of the control
 ///     <p>
 ///   }
 ///   \table_row3{   <b>`Control.GetLabel(id)[.index()]`</b>,
 ///                  \anchor Control_GetLabel
 ///                  _string_,
 ///     @return The label value or texture name of the control with the given id.
-///     @param id - The id of the control
-///     @param index - [opt] Optionally you can specify index(1) to retrieve label2 from an Edit
+///     @param id - the id of the control
+///     @param index - [opt] optionally you can specify index(1) to retrieve label2 from an Edit
 ///     control.
 ///     <p><hr>
 ///     @skinning_v15 **[Infolabel Updated]** \link Control_GetLabel `Control.GetLabel(id)`\endlink
@@ -8639,7 +8720,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_EpgEventDuration_format
 ///                  _string_,
 ///     @return The duration of the currently playing EPG event in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8658,7 +8739,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_EpgEventElapsedTime_format
 ///                  _string_,
 ///     @return The time of the current position of the currently playing epg event in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8676,7 +8757,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_EpgEventRemainingTime_format
 ///                  _string_,
 ///     @return The remaining time for currently playing epg event in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8694,7 +8775,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_EpgEventSeekTime_format
 ///                  _string_,
 ///     @return The time the user is seeking within the currently playing epg event in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8712,7 +8793,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_EpgEventFinishTime_format
 ///                  _string_,
 ///     Returns the time the currently playing epg event will end in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8728,7 +8809,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_TimeShiftStart_format
 ///                  _string_,
 ///     Returns the start time of the timeshift buffer in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8744,7 +8825,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_TimeShiftEnd_format
 ///                  _string_,
 ///     @return The end time of the timeshift buffer in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8760,7 +8841,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_TimeShiftCur_format
 ///                  _string_,
 ///     Returns the current playback time within the timeshift buffer in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8776,7 +8857,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_TimeShiftOffset_format
 ///                  _string_,
 ///     Returns the delta of timeshifted time to actual time in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8794,7 +8875,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_TimeshiftProgressDuration_format
 ///                  _string_,
 ///     @return The duration of the PVR timeshift progress in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8812,7 +8893,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_TimeshiftProgressStartTime_format
 ///                  _string_,
 ///     @return The start time of the PVR timeshift progress in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -8830,7 +8911,7 @@ const infomap pvr[] =            {{ "isrecording",              PVR_IS_RECORDING
 ///                  \anchor PVR_TimeshiftProgressEndTime_format
 ///                  _string_,
 ///     @return The end time of the PVR timeshift progress in different formats.
-///     @param format [opt] The format of the return time value.
+///     @param format [opt] the format of the return time value.
 ///     See \ref TIME_FORMAT for the list of possible values.
 ///     <p>
 ///   }
@@ -9475,7 +9556,7 @@ const infomap rds[] =            {{ "hasrds",                   RDS_HAS_RDS },
 ///       - <b>"Colour"</b>
 ///       - <b>"Black and White"</b>
 ///     <p>
-///     @deprecated Slideshow_Colour `Slideshow.Colour`\endlink is deprecated and will be removed in future Kodi versions
+///     @deprecated \link Slideshow_Colour `Slideshow.Colour`\endlink is deprecated and will be removed in future Kodi versions
 ///     <p><hr>
 ///     @skinning_v13 **[New Infolabel]** \link Slideshow_Colour `Slideshow.Colour`\endlink
 ///     <p>
@@ -9575,7 +9656,7 @@ const infomap rds[] =            {{ "hasrds",                   RDS_HAS_RDS },
 ///      - <b>"Program (Auto)"</b>
 ///      - <b>"Aperture priority (Semi-Auto)"</b>
 ///      - <b>"Shutter priority (semi-auto)"</b>
-///      - etc...
+///      - etc
 ///     @note This is the value of the EXIF ExposureProgram tag
 ///     (hex code 0x8822).
 ///     <p><hr>
@@ -9710,7 +9791,7 @@ const infomap rds[] =            {{ "hasrds",                   RDS_HAS_RDS },
 ///      - <b>"Daylight"</b>
 ///      - <b>"Fluorescent"</b>
 ///      - <b>"Incandescent"</b>
-///      - etc...
+///      - etc
 ///     @note This is the value of the EXIF LightSource tag (hex code 0x9208).
 ///     <p><hr>
 ///     @skinning_v13 **[New Infolabel]** \link Slideshow_LightSource `Slideshow.LightSource`\endlink
@@ -9781,7 +9862,7 @@ const infomap rds[] =            {{ "hasrds",                   RDS_HAS_RDS },
 ///      - <b>"Top Right"</b>
 ///      - <b>"Left Top"</b>
 ///      - <b>"Right Bottom"</b>
-///      - etc...
+///      - etc
 ///     @note This is the value of the EXIF Orientation tag (hex code 0x0112).
 ///     <p><hr>
 ///     @skinning_v13 **[New Infolabel]** \link Slideshow_Orientation `Slideshow.Orientation`\endlink
