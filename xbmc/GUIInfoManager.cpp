@@ -89,6 +89,7 @@ typedef struct
 /// \tableofcontents
 ///
 /// \section modules__infolabels_boolean_conditions_Description Description
+/// <hr>
 /// Skins can use boolean conditions with the <b>\<visible\></b> tag or with condition
 /// attributes. Scripts can read boolean conditions with
 /// <b>xbmc.getCondVisibility(condition)</b>.
@@ -108,6 +109,7 @@ typedef struct
 /// \page modules__infolabels_boolean_conditions
 /// \section modules_list_infolabels_booleans List of Infolabels and Boolean conditions
 /// \subsection modules__infolabels_boolean_conditions_Addon Addon
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Addon.SettingStr(addon_id\,setting_id)`</b>,
@@ -154,6 +156,7 @@ const infomap addons[] = {
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Container Container
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Container.HasFiles`</b>,
@@ -663,6 +666,7 @@ const infomap container_str[]  = {{ "property",         CONTAINER_PROPERTY },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Control Control
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Control.HasFocus(id)`</b>,
@@ -711,6 +715,7 @@ const infomap control_labels[] = {{ "hasfocus",         CONTROL_HAS_FOCUS },
 /// \page modules__infolabels_boolean_conditions
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Fanart Fanart
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Fanart.Color1`</b>,
@@ -752,6 +757,7 @@ const infomap fanart_labels[] =  {{ "color1",           FANART_COLOR1 },
 								  
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Game Game
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Game.Title`</b>,
@@ -807,6 +813,7 @@ const infomap fanart_labels[] =  {{ "color1",           FANART_COLOR1 },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_GlobalBools Global
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`true`</b>,
@@ -838,6 +845,7 @@ const infomap fanart_labels[] =  {{ "color1",           FANART_COLOR1 },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Integer Integer
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Integer.ValueOf(number)`</b>,
@@ -950,6 +958,7 @@ const infomap integer_bools[] =  {{ "isequal",          INTEGER_IS_EQUAL },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Library Library
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Library.IsScanning`</b>,
@@ -1120,6 +1129,7 @@ const infomap integer_bools[] =  {{ "isequal",          INTEGER_IS_EQUAL },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_ListItem ListItem
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`ListItem.Thumb`</b>,
@@ -3897,6 +3907,7 @@ const infomap listitem_labels[]= {{ "thumb",            LISTITEM_THUMB },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_musicpartymode Music party mode
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`MusicPartyMode.Enabled`</b>,
@@ -3953,6 +3964,7 @@ const infomap musicpartymode[] = {{ "enabled",           MUSICPM_ENABLED },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_MusicPlayer Music player
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`MusicPlayer.Offset(number).Exists`</b>,
@@ -4736,6 +4748,7 @@ const infomap musicplayer[] =    {{ "title",            MUSICPLAYER_TITLE },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Network Network
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Network.IsDHCP`</b>,
@@ -4804,6 +4817,7 @@ const infomap network_labels[] = {
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Player Player
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Player.HasAudio`</b>,
@@ -5582,6 +5596,7 @@ const infomap player_process[] = {{"videodecoder", PLAYER_PROCESS_VIDEODECODER},
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Playlist Playlist
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Playlist.Length(media)`</b>,
@@ -5651,6 +5666,7 @@ const infomap playlist[] =       {{ "length",           PLAYLIST_LENGTH },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Pvr PVR
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`PVR.IsRecording`</b>,
@@ -6540,6 +6556,7 @@ const infomap pvr_times[] =      {{ "epgeventduration",       PVR_EPG_EVENT_DURA
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_RDS RDS
+/// <hr>
 /// @note Only supported if both the PVR backend and the Kodi client support RDS.
 ///
 /// \table_start
@@ -7035,6 +7052,7 @@ const infomap rds[] =            {{ "hasrds",                   RDS_HAS_RDS },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_RetroPlayer RetroPlayer
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`RetroPlayer.VideoFilter`</b>,
@@ -7086,6 +7104,7 @@ const infomap retroplayer[] =
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Skin Skin
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Skin.HasSetting(setting)`</b>,
@@ -7183,6 +7202,7 @@ const infomap skin_labels[] =    {{ "currenttheme",      SKIN_THEME },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_slideshow Slideshow
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Slideshow.IsActive`</b>,
@@ -7834,6 +7854,7 @@ const infomap slideshow[] = {
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_String String
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`String.IsEmpty(info)`</b>,
@@ -7915,6 +7936,7 @@ const infomap string_bools[] =   {{ "isempty",          STRING_IS_EMPTY },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_System System
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`System.AlarmLessOrEqual(alarmname\,seconds)`</b>,
@@ -8738,6 +8760,7 @@ const infomap system_param[] =   {{ "hasalarm",         SYSTEM_HAS_ALARM },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Videoplayer Video player
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`VideoPlayer.UsingOverlays`</b>,
@@ -9968,6 +9991,7 @@ const infomap videoplayer[] =    {{ "title",            VIDEOPLAYER_TITLE },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Visualisation Visualisation
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Visualisation.Enabled`</b>,
@@ -10012,6 +10036,7 @@ const infomap visualisation[] =  {{ "locked",           VISUALISATION_LOCKED },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Weather Weather
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Weather.IsFetched`</b>,
@@ -10070,6 +10095,7 @@ const infomap weather[] =        {{ "isfetched",        WEATHER_IS_FETCHED },
 
 /// \page modules__infolabels_boolean_conditions
 /// \subsection modules__infolabels_boolean_conditions_Window Window
+/// <hr>
 /// \table_start
 ///   \table_h3{ Labels, Type, Description }
 ///   \table_row3{   <b>`Window.IsMedia`</b>,
