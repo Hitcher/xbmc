@@ -204,9 +204,10 @@ bool CGUIControlGroupList::ResetFocusToFirstItem()
   {
     CGUIMessage message(GUI_MSG_LOSTFOCUS, GetID(), focusedControl->GetID(), firstControl->GetID());
     focusedControl->OnMessage(message);
-    CGUIMessage message2(GUI_MSG_SETFOCUS, GetID(), firstControl->GetID());
-    firstControl->OnMessage(message2);
   }
+
+  CGUIMessage message(GUI_MSG_SETFOCUS, GetID(), firstControl->GetID());
+  firstControl->OnMessage(message);
 
   m_focusedControl = firstControl->GetID();
   m_scroller.SetValue(0.0f);
