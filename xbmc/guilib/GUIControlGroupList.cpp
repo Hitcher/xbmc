@@ -190,6 +190,43 @@ bool CGUIControlGroupList::OnAction(const CAction& action)
   return CGUIControlGroup::OnAction(action);
 }
 
+bool CGUIControlGroupList::ResetFocusToFirstItem()
+{
+  // Find the first visible and focusable control
+  CGUIControl* firstControl = nullptr;
+  for (iControls it = m_children.begin(); it != m_children.end(); ++it)
+  {
+    CGUIControl* child = *it;
+    if (child->IsVisible() && child->CanFocus())
+    {
+      firstControl = child;
+      break;
+    }
+  }
+
+  if (!firstControl)
+    return false;
+
+  CGUIControl* focusedControl = GetFocusedControl();
+
+  // If there's a currently focused control and it's different from the first control,
+  // send proper focus messages to maintain consistent state
+  if (focusedControl && focusedControl != firstControl)
+  {
+    CGUIMessage message(GUI_MSG_LOSTFOCUS, GetID(), focusedControl->GetID(), firstControl->GetID());
+    focusedControl->OnMessage(message);
+  }
+
+  CGUIMessage message(GUI_MSG_SETFOCUS, GetID(), firstControl->GetID());
+  firstControl->OnMessage(message);
+
+  m_focusedControl = firstControl->GetID();
+  m_scroller.SetValue(0.0f);
+  SetInvalid();
+  MarkDirtyRegion();
+  return true;
+}
+
 bool CGUIControlGroupList::OnMessage(CGUIMessage& message)
 {
   switch (message.GetMessage() )
