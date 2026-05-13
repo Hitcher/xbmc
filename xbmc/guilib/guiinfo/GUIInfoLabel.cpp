@@ -301,7 +301,9 @@ enum class InfoFormat
   INFO,
   ESC_INFO,
   VAR,
-  ESC_VAR
+  ESC_VAR,
+  MAP,
+  ESC_MAP
 };
 
 struct InfoFormatData
@@ -310,10 +312,12 @@ struct InfoFormatData
   InfoFormat val{0};
 };
 
-constexpr std::array<InfoFormatData, 4> infoformatmap = {{{"$INFO[", InfoFormat::INFO},
+constexpr std::array<InfoFormatData, 6> infoformatmap = {{{"$INFO[", InfoFormat::INFO},
                                                           {"$ESCINFO[", InfoFormat::ESC_INFO},
                                                           {"$VAR[", InfoFormat::VAR},
-                                                          {"$ESCVAR[", InfoFormat::ESC_VAR}}};
+                                                          {"$ESCVAR[", InfoFormat::ESC_VAR},
+                                                          {"$MAP[", InfoFormat::MAP},
+                                                          {"$ESCMAP[", InfoFormat::ESC_MAP}}};
 
 } // unnamed namespace
 
@@ -329,7 +333,7 @@ void CGUIInfoLabel::Parse(const std::string& label,
   work = ReplaceAddonStrings(std::move(work));
   // Step 3: Replace all game controller strings with the real string
   work = ReplaceControllerStrings(std::move(work));
-  // Step 4: Find all $INFO[info,prefix,postfix] blocks
+  // Step 4: Find all $INFO[info,prefix,postfix], $VAR[name] and $MAP[infolabel] blocks
   InfoFormat format;
   do
   {
@@ -364,6 +368,8 @@ void CGUIInfoLabel::Parse(const std::string& label,
           CGUIInfoManager& infoMgr = CServiceBroker::GetGUI()->GetInfoManager();
 
           int info;
+          std::string mapName;
+
           if (format == InfoFormat::VAR || format == InfoFormat::ESC_VAR)
           {
             info = infoMgr.TranslateSkinVariableString(params[0], context);
@@ -377,19 +383,46 @@ void CGUIInfoLabel::Parse(const std::string& label,
             if (info == 0) // skinner didn't define this conditional label!
               CLog::Log(LOGWARNING, "Label Formatting: $VAR[{}] is not defined", params[0]);
           }
+          else if (format == InfoFormat::MAP || format == InfoFormat::ESC_MAP)
+          {
+            // $MAP[ListItem.AudioCodec]          — map name == infolabel name
+            // $MAP[AudioCodecShort,ListItem.AudioCodec] — explicit named map
+            if (params.size() >= 2)
+            {
+              // named map form: first param is map name, second is infolabel
+              mapName = StringUtils::Trim(params[0]);
+              info = infoMgr.TranslateString(StringUtils::Trim(params[1]));
+            }
+            else
+            {
+              // default map form: infolabel name is also used as the map name
+              mapName = StringUtils::Trim(params[0]);
+              info = infoMgr.TranslateString(StringUtils::Trim(params[0]));
+            }
+          }
           else
+          {
             info = infoMgr.TranslateString(params[0]);
+          }
 
           std::string prefix;
-          if (params.size() > 1)
-            prefix = params[1];
-
           std::string postfix;
-          if (params.size() > 2)
-            postfix = params[2];
+
+          // prefix/postfix are only meaningful for $INFO — not for $VAR or $MAP
+          if (format != InfoFormat::VAR && format != InfoFormat::ESC_VAR &&
+              format != InfoFormat::MAP && format != InfoFormat::ESC_MAP)
+          {
+            if (params.size() > 1)
+              prefix = params[1];
+            if (params.size() > 2)
+              postfix = params[2];
+          }
 
           infoPortion.emplace_back(info, prefix, postfix,
-                                   format == InfoFormat::ESC_INFO || format == InfoFormat::ESC_VAR);
+                                   format == InfoFormat::ESC_INFO ||
+                                   format == InfoFormat::ESC_VAR ||
+                                   format == InfoFormat::ESC_MAP,
+                                   mapName);
         }
         // and delete it from our work string
         work.erase(0, pos2 + 1);
@@ -409,9 +442,11 @@ void CGUIInfoLabel::Parse(const std::string& label,
 CGUIInfoLabel::CInfoPortion::CInfoPortion(int info,
                                           const std::string& prefix,
                                           const std::string& postfix,
-                                          bool escaped /*= false */)
+                                          bool escaped /*= false */,
+                                          const std::string& mapName /*= ""*/)
   : m_info(info),
     m_escaped(escaped),
+    m_mapName(mapName),
     m_prefix(prefix),
     m_postfix(postfix)
 {
@@ -426,9 +461,24 @@ CGUIInfoLabel::CInfoPortion::CInfoPortion(int info,
 
 bool CGUIInfoLabel::CInfoPortion::NeedsUpdate(std::string_view label) const
 {
-  if (m_label != label)
+  // For $MAP portions, resolve the raw infolabel value through the skin map before caching
+  std::string resolved;
+  if (!m_mapName.empty() && !label.empty())
   {
-    m_label = label;
+    auto skin = CServiceBroker::GetGUI()->GetSkinInfo();
+    if (skin)
+      resolved = skin->LookupSkinMap(m_mapName, std::string(label));
+    else
+      resolved = label;
+  }
+  else
+  {
+    resolved = label;
+  }
+
+  if (m_label != resolved)
+  {
+    m_label = std::move(resolved);
     return true;
   }
   return false;

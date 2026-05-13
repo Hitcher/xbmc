@@ -405,6 +405,16 @@ const INFO::CSkinVariableString* CSkinInfo::CreateSkinVariable(const std::string
   return m_includes.CreateSkinVariable(name, context);
 }
 
+std::string CSkinInfo::LookupSkinMap(const std::string& mapName, const std::string& key) const
+{
+  return m_includes.LookupSkinMap(mapName, key);
+}
+
+bool CSkinInfo::HasSkinMap(const std::string& mapName) const
+{
+  return m_includes.HasSkinMap(mapName);
+}
+
 void CSkinInfo::OnPreInstall()
 {
   auto skin = CServiceBroker::GetGUI()->GetSkinInfo();

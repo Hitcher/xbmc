@@ -136,7 +136,8 @@ private:
     CInfoPortion(int info,
                  const std::string& prefix,
                  const std::string& postfix,
-                 bool escaped = false);
+                 bool escaped = false,
+                 const std::string& mapName = "");
     bool NeedsUpdate(std::string_view label) const;
     std::string Get() const;
     int GetInfo() const { return m_info; }
@@ -147,6 +148,7 @@ private:
     mutable std::string m_label;
     std::string m_prefix;
     std::string m_postfix;
+    std::string m_mapName; ///< non-empty when this portion uses $MAP[...] lookup
   };
 
   /*! \brief Parse a provided label string into the list of info portions that may compose the label. Info portions mean the portions of complex
