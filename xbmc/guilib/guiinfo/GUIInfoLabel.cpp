@@ -369,6 +369,8 @@ void CGUIInfoLabel::Parse(const std::string& label,
 
           int info;
           std::string mapName;
+          std::string prefix;
+          std::string postfix;
 
           if (format == InfoFormat::VAR || format == InfoFormat::ESC_VAR)
           {
@@ -382,39 +384,44 @@ void CGUIInfoLabel::Parse(const std::string& label,
             }
             if (info == 0) // skinner didn't define this conditional label!
               CLog::Log(LOGWARNING, "Label Formatting: $VAR[{}] is not defined", params[0]);
+            if (params.size() > 1)
+              prefix = params[1];
+            if (params.size() > 2)
+              postfix = params[2];
           }
           else if (format == InfoFormat::MAP || format == InfoFormat::ESC_MAP)
           {
-            // $MAP[ListItem.AudioCodec]          — map name == infolabel name
-            // $MAP[AudioCodecShort,ListItem.AudioCodec] — explicit named map
-            if (params.size() >= 2)
+            // $MAP[infolabel]                          — default map, name == infolabel name
+            // $MAP[infolabel,prefix,postfix]           — default map with prefix/postfix
+            // $MAP[mapName,infolabel]                  — named map (map name must start with "map")
+            // $MAP[mapName,infolabel,prefix,postfix]   — named map with prefix/postfix
+            std::string p0 = params[0];
+            StringUtils::Trim(p0);
+            if (StringUtils::StartsWithNoCase(p0, "map") && params.size() >= 2)
             {
-              // named map form: first param is map name, second is infolabel
-              std::string p0 = params[0];
+              // named map form
               std::string p1 = params[1];
-              mapName = StringUtils::Trim(p0);
+              mapName = p0;
               info = infoMgr.TranslateString(StringUtils::Trim(p1));
+              if (params.size() > 2)
+                prefix = params[2];
+              if (params.size() > 3)
+                postfix = params[3];
             }
             else
             {
-              // default map form: infolabel name is also used as the map name
-              std::string p0 = params[0];
-              mapName = StringUtils::Trim(p0);
+              // default map form
+              mapName = p0;
               info = infoMgr.TranslateString(mapName);
+              if (params.size() > 1)
+                prefix = params[1];
+              if (params.size() > 2)
+                postfix = params[2];
             }
           }
           else
           {
             info = infoMgr.TranslateString(params[0]);
-          }
-
-          std::string prefix;
-          std::string postfix;
-
-          // prefix/postfix are only meaningful for $INFO — not for $VAR or $MAP
-          if (format != InfoFormat::VAR && format != InfoFormat::ESC_VAR &&
-              format != InfoFormat::MAP && format != InfoFormat::ESC_MAP)
-          {
             if (params.size() > 1)
               prefix = params[1];
             if (params.size() > 2)
