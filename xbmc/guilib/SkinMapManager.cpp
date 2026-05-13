@@ -17,6 +17,7 @@ using namespace KODI::GUILIB;
 void CSkinMapManager::Clear()
 {
   m_maps.clear();
+  m_refs.clear();
 }
 
 void CSkinMapManager::LoadMaps(const TiXmlElement* node)
@@ -30,27 +31,37 @@ void CSkinMapManager::LoadMaps(const TiXmlElement* node)
     const char* name = mapElement->Attribute("name");
     if (name && *name)
     {
-      std::unordered_map<std::string, std::string> entries;
-
-      const TiXmlElement* entry = mapElement->FirstChildElement("entry");
-      while (entry)
+      const char* ref = mapElement->Attribute("ref");
+      if (ref && *ref)
       {
-        const char* key = entry->Attribute("key");
-        const TiXmlNode* textNode = entry->FirstChild();
-        if (key && *key && textNode && textNode->Type() == TiXmlNode::TINYXML_TEXT)
-          entries.try_emplace(key, textNode->ValueStr());
-
-        entry = entry->NextSiblingElement("entry");
-      }
-
-      if (!entries.empty())
-      {
-        CLog::LogF(LOGDEBUG, "Loaded skin map '{}' with {} entries", name, entries.size());
-        m_maps.insert_or_assign(name, std::move(entries));
+        // reference to another map — store the alias
+        CLog::LogF(LOGDEBUG, "Skin map '{}' references map '{}'", name, ref);
+        m_refs.insert_or_assign(name, ref);
       }
       else
       {
-        CLog::LogF(LOGWARNING, "Skin map '{}' has no valid entries, skipping", name);
+        std::unordered_map<std::string, std::string> entries;
+
+        const TiXmlElement* entry = mapElement->FirstChildElement("entry");
+        while (entry)
+        {
+          const char* key = entry->Attribute("key");
+          const TiXmlNode* textNode = entry->FirstChild();
+          if (key && *key && textNode && textNode->Type() == TiXmlNode::TINYXML_TEXT)
+            entries.try_emplace(key, textNode->ValueStr());
+
+          entry = entry->NextSiblingElement("entry");
+        }
+
+        if (!entries.empty())
+        {
+          CLog::LogF(LOGDEBUG, "Loaded skin map '{}' with {} entries", name, entries.size());
+          m_maps.insert_or_assign(name, std::move(entries));
+        }
+        else
+        {
+          CLog::LogF(LOGWARNING, "Skin map '{}' has no valid entries, skipping", name);
+        }
       }
     }
 
@@ -60,7 +71,13 @@ void CSkinMapManager::LoadMaps(const TiXmlElement* node)
 
 std::string CSkinMapManager::Lookup(const std::string& mapName, const std::string& key) const
 {
-  const auto mapIt = m_maps.find(mapName);
+  // resolve ref alias if present
+  const std::string* resolvedName = &mapName;
+  const auto refIt = m_refs.find(mapName);
+  if (refIt != m_refs.end())
+    resolvedName = &refIt->second;
+
+  const auto mapIt = m_maps.find(*resolvedName);
   if (mapIt == m_maps.end())
     return key; // no map defined — return raw value unchanged
 
@@ -73,5 +90,7 @@ std::string CSkinMapManager::Lookup(const std::string& mapName, const std::strin
 
 bool CSkinMapManager::HasMap(const std::string& mapName) const
 {
+  if (m_refs.count(mapName) > 0)
+    return true;
   return m_maps.count(mapName) > 0;
 }

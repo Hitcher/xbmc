@@ -70,6 +70,9 @@ private:
   std::unordered_map<std::string,
                      std::unordered_map<std::string, std::string>>
       m_maps;
+
+  // key = map name, value = name of map it references
+  std::unordered_map<std::string, std::string> m_refs;
 };
 
 } // namespace KODI::GUILIB
