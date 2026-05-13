@@ -390,14 +390,17 @@ void CGUIInfoLabel::Parse(const std::string& label,
             if (params.size() >= 2)
             {
               // named map form: first param is map name, second is infolabel
-              mapName = StringUtils::Trim(params[0]);
-              info = infoMgr.TranslateString(StringUtils::Trim(params[1]));
+              std::string p0 = params[0];
+              std::string p1 = params[1];
+              mapName = StringUtils::Trim(p0);
+              info = infoMgr.TranslateString(StringUtils::Trim(p1));
             }
             else
             {
               // default map form: infolabel name is also used as the map name
-              mapName = StringUtils::Trim(params[0]);
-              info = infoMgr.TranslateString(StringUtils::Trim(params[0]));
+              std::string p0 = params[0];
+              mapName = StringUtils::Trim(p0);
+              info = infoMgr.TranslateString(mapName);
             }
           }
           else
