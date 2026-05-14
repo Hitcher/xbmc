@@ -28,15 +28,29 @@ void CSkinMapManager::LoadMaps(const TiXmlElement* node)
   const TiXmlElement* mapElement = node->FirstChildElement("map");
   while (mapElement)
   {
-    const char* name = mapElement->Attribute("name");
-    if (name && *name)
-    {
       const char* ref = mapElement->Attribute("ref");
       if (ref && *ref)
       {
         // reference to another map — store the alias
         CLog::LogF(LOGDEBUG, "Skin map '{}' references map '{}'", name, ref);
         m_refs.insert_or_assign(name, ref);
+
+        // also load any override entries
+        std::unordered_map<std::string, std::string> overrides;
+        const TiXmlElement* entry = mapElement->FirstChildElement("entry");
+        while (entry)
+        {
+          const char* key = entry->Attribute("key");
+          const TiXmlNode* textNode = entry->FirstChild();
+          if (key && *key && textNode && textNode->Type() == TiXmlNode::TINYXML_TEXT)
+            overrides.try_emplace(key, textNode->ValueStr());
+          entry = entry->NextSiblingElement("entry");
+        }
+        if (!overrides.empty())
+        {
+          CLog::LogF(LOGDEBUG, "Skin map '{}' has {} override entries", name, overrides.size());
+          m_maps.insert_or_assign(name, std::move(overrides));
+        }
       }
       else
       {
@@ -71,13 +85,30 @@ void CSkinMapManager::LoadMaps(const TiXmlElement* node)
 
 std::string CSkinMapManager::Lookup(const std::string& mapName, const std::string& key) const
 {
-  // resolve ref alias if present
-  const std::string* resolvedName = &mapName;
+  // check for override entries first if this map has a ref
   const auto refIt = m_refs.find(mapName);
   if (refIt != m_refs.end())
-    resolvedName = &refIt->second;
+  {
+    // check overrides first
+    const auto overrideMapIt = m_maps.find(mapName);
+    if (overrideMapIt != m_maps.end())
+    {
+      const auto overrideEntryIt = overrideMapIt->second.find(key);
+      if (overrideEntryIt != overrideMapIt->second.end())
+        return overrideEntryIt->second;
+    }
+    // fall through to referenced map
+    const auto mapIt = m_maps.find(refIt->second);
+    if (mapIt == m_maps.end())
+      return key; // referenced map not found — return raw value unchanged
+    const auto entryIt = mapIt->second.find(key);
+    if (entryIt == mapIt->second.end())
+      return key; // key not in map — return raw value unchanged
+    return entryIt->second;
+  }
 
-  const auto mapIt = m_maps.find(*resolvedName);
+  // no ref — look up directly
+  const auto mapIt = m_maps.find(mapName);
   if (mapIt == m_maps.end())
     return key; // no map defined — return raw value unchanged
 
