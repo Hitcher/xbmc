@@ -28,6 +28,9 @@ void CSkinMapManager::LoadMaps(const TiXmlElement* node)
   const TiXmlElement* mapElement = node->FirstChildElement("map");
   while (mapElement)
   {
+    const char* name = mapElement->Attribute("name");
+    if (name && *name)
+    {
       const char* ref = mapElement->Attribute("ref");
       if (ref && *ref)
       {
@@ -78,7 +81,6 @@ void CSkinMapManager::LoadMaps(const TiXmlElement* node)
         }
       }
     }
-
     mapElement = mapElement->NextSiblingElement("map");
   }
 }
