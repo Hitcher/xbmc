@@ -36,6 +36,8 @@
 #include "utils/log.h"
 #include "windows/GUIMediaWindow.h"
 
+#include <charconv>
+
 using namespace KODI;
 
 namespace
@@ -53,34 +55,34 @@ static int ResetGroupList(const std::vector<std::string>& params)
     CLog::Log(LOGWARNING, "ResetGroupList: No active window or dialog found");
     return 0;
   }
+
+  int controlId = 0;
+  const auto& param = params[0];
+  const auto result = std::from_chars(param.data(), param.data() + param.size(), controlId);
+  if (result.ec != std::errc{})
   {
-    int controlId = 0;
-    try
-    {
-      controlId = std::stoi(params[0]);
-    }
-    catch (const std::exception&)
-    {
-      CLog::Log(LOGWARNING, "ResetGroupList: Invalid control ID '{}'", params[0]);
-      return 0;
-    }
-    CGUIControl* control = window->GetControl(controlId);
-    if (!control)
-    {
-      CLog::Log(LOGWARNING, "ResetGroupList: Control {} not found", params[0]);
-      return 0;
-    }
-    if (control->GetControlType() != CGUIControl::GUICONTROL_GROUPLIST)
-    {
-      CLog::Log(LOGWARNING, "ResetGroupList: Control {} is not a grouplist", params[0]);
-      return 0;
-    }
-    if (static_cast<CGUIControlGroupList*>(control)->ResetFocusToFirstItem())
-      CLog::Log(LOGDEBUG, "ResetGroupList: Reset grouplist {} to first item", params[0]);
-    else
-      CLog::Log(LOGWARNING, "ResetGroupList: No focusable controls found in grouplist {}",
-                params[0]);
+    CLog::Log(LOGWARNING, "ResetGroupList: Invalid control ID '{}'", params[0]);
+    return 0;
   }
+
+  CGUIControl* control = window->GetControl(controlId);
+  if (!control)
+  {
+    CLog::Log(LOGWARNING, "ResetGroupList: Control {} not found", params[0]);
+    return 0;
+  }
+
+  if (control->GetControlType() != CGUIControl::GUICONTROL_GROUPLIST)
+  {
+    CLog::Log(LOGWARNING, "ResetGroupList: Control {} is not a grouplist", params[0]);
+    return 0;
+  }
+
+  if (static_cast<CGUIControlGroupList*>(control)->ResetFocusToFirstItem())
+    CLog::Log(LOGDEBUG, "ResetGroupList: Reset grouplist {} to first item", params[0]);
+  else
+    CLog::Log(LOGWARNING, "ResetGroupList: No focusable controls found in grouplist {}",
+              params[0]);
 
   return 0;
 }
