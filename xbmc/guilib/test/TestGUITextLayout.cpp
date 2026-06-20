@@ -169,8 +169,8 @@ TEST(TestGUITextLayoutParseText, DoublyNestedLowercaseTagsStripped)
 
 TEST(TestGUITextLayoutParseText, DoublyNestedCapitalizeTagsStripped)
 {
-  EXPECT_TRUE(FiltersTo("[CAPITALIZE][CAPITALIZE]hello world[/CAPITALIZE][/CAPITALIZE]",
-                        "Hello World"));
+  EXPECT_TRUE(
+      FiltersTo("[CAPITALIZE][CAPITALIZE]hello world[/CAPITALIZE][/CAPITALIZE]", "Hello World"));
 }
 
 TEST(TestGUITextLayoutParseText, DoublyNestedLightTagsStripped)
@@ -321,10 +321,9 @@ TEST(TestGUITextLayoutParseText, AllSixStyleTagsInSequence)
 {
   // Note: [UPPERCASE] transforms 'u' -> 'U', [LOWERCASE] 'L' -> 'l',
   // [CAPITALIZE] capitalizes first letter of each word.
-  EXPECT_TRUE(FiltersTo(
-      "[B]b[/B][I]i[/I][UPPERCASE]u[/UPPERCASE]"
-      "[LOWERCASE]L[/LOWERCASE][CAPITALIZE]c[/CAPITALIZE][LIGHT]lt[/LIGHT]",
-      "biUlClt"));
+  EXPECT_TRUE(FiltersTo("[B]b[/B][I]i[/I][UPPERCASE]u[/UPPERCASE]"
+                        "[LOWERCASE]L[/LOWERCASE][CAPITALIZE]c[/CAPITALIZE][LIGHT]lt[/LIGHT]",
+                        "biUlClt"));
 }
 
 // ===========================================================================
@@ -346,11 +345,10 @@ TEST(TestGUITextLayoutParseText, AllStylesNested)
   // Multiple case-transform tags active simultaneously.
   // ParseText applies UPPERCASE, then LOWERCASE, then CAPITALIZE,
   // resulting in "Content".
-  EXPECT_TRUE(FiltersTo(
-      "[B][I][UPPERCASE][LOWERCASE][CAPITALIZE][LIGHT]"
-      "content"
-      "[/LIGHT][/CAPITALIZE][/LOWERCASE][/UPPERCASE][/I][/B]",
-      "Content"));
+  EXPECT_TRUE(FiltersTo("[B][I][UPPERCASE][LOWERCASE][CAPITALIZE][LIGHT]"
+                        "content"
+                        "[/LIGHT][/CAPITALIZE][/LOWERCASE][/UPPERCASE][/I][/B]",
+                        "Content"));
 }
 
 TEST(TestGUITextLayoutParseText, InterleavedBoldItalic_NoUnderflow)
@@ -422,9 +420,9 @@ TEST(TestGUITextLayoutParseText, MatchedTabsTagConsumed)
 // and not leak into the displayed text.
 TEST(TestGUITextLayoutParseText, UnmatchedOpenTabsTagConsumed)
 {
-  // Current behaviour leaks the literal tag into the output.
-  // Expected behaviour is to consume the tag while emitting no tabs.
+  // Unmatched opening [TABS] tags are consumed but emit no tab characters.
   EXPECT_TRUE(PlainTextLacks("[TABS]2 label", "[TABS]"));
+  EXPECT_TRUE(FiltersTo("[TABS]2 label", "2 label"));
 }
 
 // ===========================================================================
@@ -521,9 +519,7 @@ TEST(TestGUITextLayoutParseText, DepthZeroAfterMatchedPair_PlainTextAfter)
 
 TEST(TestGUITextLayoutParseText, TwoCompleteNestedPairsInSequence)
 {
-  EXPECT_TRUE(FiltersTo(
-      "[B][B]first[/B][/B] [I][I]second[/I][/I]",
-      "first second"));
+  EXPECT_TRUE(FiltersTo("[B][B]first[/B][/B] [I][I]second[/I][/I]", "first second"));
 }
 
 // ===========================================================================
