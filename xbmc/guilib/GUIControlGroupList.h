@@ -99,6 +99,12 @@ protected:
    */
   void ScrollPages(float pages);
   /*!
+   * \brief Change the focused child control using the normal GUI focus message flow.
+   * \param control New focused control
+   * \return True if the control accepted focus, false otherwise.
+   */
+  bool SetFocusedControl(CGUIControl* control);
+  /*!
    * \brief Change the selected control and scroll to the specified position.
    * \param control New selected control
    * \param offset Offset of the top of the visible view
@@ -131,4 +137,3 @@ protected:
   // for autosizing
   float m_minSize;
 };
-

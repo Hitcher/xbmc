@@ -20,6 +20,8 @@
 #include "utils/StringUtils.h"
 #include "windowing/WinSystem.h"
 
+#include <algorithm>
+
 using namespace KODI;
 
 CGUIControlGroupList::CGUIControlGroupList(int parentID, int controlID, float posX, float posY, float width, float height, float itemGap, int pageControl, ORIENTATION orientation, bool useControlPositions, uint32_t alignment, const CScroller& scroller)
@@ -192,38 +194,14 @@ bool CGUIControlGroupList::OnAction(const CAction& action)
 
 bool CGUIControlGroupList::ResetFocusToFirstItem()
 {
-  // Find the first visible and focusable control
-  CGUIControl* firstControl = nullptr;
-  for (iControls it = m_children.begin(); it != m_children.end(); ++it)
-  {
-    CGUIControl* child = *it;
-    if (child->IsVisible() && child->CanFocus())
-    {
-      firstControl = child;
-      break;
-    }
-  }
-
+  CGUIControl* firstControl = GetFirstFocusableControl();
   if (!firstControl)
     return false;
 
-  CGUIControl* focusedControl = GetFocusedControl();
+  if (!SetFocusedControl(firstControl))
+    return false;
 
-  // If there's a currently focused control and it's different from the first control,
-  // send proper focus messages to maintain consistent state
-  if (focusedControl && focusedControl != firstControl)
-  {
-    CGUIMessage message(GUI_MSG_LOSTFOCUS, GetID(), focusedControl->GetID(), firstControl->GetID());
-    focusedControl->OnMessage(message);
-  }
-
-  CGUIMessage message(GUI_MSG_SETFOCUS, GetID(), firstControl->GetID());
-  firstControl->OnMessage(message);
-
-  m_focusedControl = firstControl->GetID();
-  m_scroller.SetValue(0.0f);
-  SetInvalid();
-  MarkDirtyRegion();
+  ScrollTo(0.f);
   return true;
 }
 
@@ -770,39 +748,39 @@ void CGUIControlGroupList::ScrollPages(float pages)
   ScrollTo(newOffset);
 }
 
-void CGUIControlGroupList::MoveTo(CGUIControl* control, float offset)
+bool CGUIControlGroupList::SetFocusedControl(CGUIControl* control)
 {
-  CGUIControl* focusedControl = GetFocusedControl();
+  if (!control)
+    return false;
 
-  if (focusedControl && control)
+  CGUIControl* focusedControl = GetFocusedControl();
+  if (focusedControl && focusedControl != control)
   {
     CGUIMessage message(GUI_MSG_LOSTFOCUS, GetID(), focusedControl->GetID(), control->GetID());
     focusedControl->OnMessage(message);
-
-    CGUIMessage message2(GUI_MSG_SETFOCUS, GetID(), control->GetID());
-    control->OnMessage(message2);
   }
+
+  CGUIMessage message(GUI_MSG_SETFOCUS, GetID(), control->GetID());
+  return control->OnMessage(message);
+}
+
+void CGUIControlGroupList::MoveTo(CGUIControl* control, float offset)
+{
+  SetFocusedControl(control);
   ScrollTo(offset);
 }
 
 CGUIControl* CGUIControlGroupList::GetFirstFocusableControl() const
 {
-  for (ciControls it = m_children.begin(); it != m_children.end(); ++it)
-  {
-    CGUIControl* child = *it;
-    if (child->CanFocus())
-      return child;
-  }
-  return nullptr;
+  const auto it = std::ranges::find_if(m_children, [](const auto* child)
+                                       { return child->IsVisible() && child->CanFocus(); });
+  return it != m_children.end() ? *it : nullptr;
 }
 
 CGUIControl* CGUIControlGroupList::GetLastFocusableControl() const
 {
-  for (crControls it = m_children.rbegin(); it != m_children.rend(); ++it)
-  {
-    CGUIControl* child = *it;
-    if (child->CanFocus())
-      return child;
-  }
-  return nullptr;
+  const auto it =
+      std::ranges::find_if(m_children.rbegin(), m_children.rend(), [](const auto* child)
+                           { return child->IsVisible() && child->CanFocus(); });
+  return it != m_children.rend() ? *it : nullptr;
 }
