@@ -779,8 +779,7 @@ CGUIControl* CGUIControlGroupList::GetFirstFocusableControl() const
 
 CGUIControl* CGUIControlGroupList::GetLastFocusableControl() const
 {
-  const auto it =
-      std::ranges::find_if(m_children.rbegin(), m_children.rend(), [](const auto* child)
-                           { return child->IsVisible() && child->CanFocus(); });
+  const auto it = std::ranges::find_if(m_children.rbegin(), m_children.rend(), [](const auto* child)
+                                       { return child->IsVisible() && child->CanFocus(); });
   return it != m_children.rend() ? *it : nullptr;
 }
