@@ -201,7 +201,7 @@ public:
   /*! \brief Look up a value in a skin-defined map.
    \param mapName  the name of the map to look up
    \param key      the raw infolabel value to look up
-   \return mapped display string, or an empty string if no mapping exists
+   \return mapped display string, or \p key unchanged if no mapping exists
   */
   std::string LookupSkinMap(std::string_view mapName, std::string_view key) const;
 

@@ -95,7 +95,7 @@ std::string CSkinMapManager::Lookup(std::string_view mapName,
   if (std::ranges::find(visited, mapName) != visited.end())
   {
     CLog::LogF(LOGWARNING, "Skin map '{}' has a circular ref chain, aborting lookup", mapName);
-    return {};
+    return std::string{key};
   }
   visited.emplace_back(mapName);
 
@@ -113,6 +113,6 @@ std::string CSkinMapManager::Lookup(std::string_view mapName,
   if (refIt != m_refs.end())
     return Lookup(refIt->second, key, visited);
 
-  // No ref and key not found -- return an empty string so callers can detect misses.
-  return {};
+  // No ref and key not found -- return raw value unchanged.
+  return std::string{key};
 }

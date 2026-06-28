@@ -23,8 +23,8 @@ namespace KODI::GUILIB
 
  Skin authors define \<map\> elements containing \<entry key="rawValue"\>Display Value\</entry\>
  children. At runtime, $MAP[MapName, infolabel] resolves the infolabel to its current string
- value and looks it up in the named map. If the key is not found, an empty string is
- returned so callers can detect lookup misses.
+ value and looks it up in the named map. If the key is not found, the raw infolabel value is
+ returned unchanged.
 
  Maps support a \p ref attribute to alias one map to another, avoiding duplicated entry data.
  A map with both \p ref and \<entry\> children inherits from the referenced map but overrides
@@ -75,7 +75,7 @@ public:
    \param mapName  the skin-defined map to search
    \param key      the raw infolabel value to look up
    \param visited  chain of already-visited map names, used for cycle detection
-   \return the mapped display string, or an empty string if no mapping is found
+   \return the mapped display string, or \p key unchanged if no mapping is found
   */
   std::string Lookup(std::string_view mapName,
                      std::string_view key,

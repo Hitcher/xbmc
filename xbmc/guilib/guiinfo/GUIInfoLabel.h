@@ -139,8 +139,7 @@ private:
      \param prefix string to prepend to the resolved value (supports $COMMA, $LBRACKET, $RBRACKET)
      \param postfix string to append to the resolved value (supports $COMMA, $LBRACKET, $RBRACKET)
      \param escaped if true, the resolved value is escaped and quoted (used by $ESCINFO, $ESCVAR, $ESCMAP)
-     \param mapName if non-empty, the resolved infolabel value is looked up in this skin map before display;
-                    misses resolve to an empty string (used by $MAP and $ESCMAP)
+     \param mapName if non-empty, the resolved infolabel value is looked up in this skin map before display (used by $MAP and $ESCMAP)
      \since v22
     */
     CInfoPortion(int info,

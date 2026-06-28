@@ -53,7 +53,7 @@ TEST_F(TestSkinMapManager, LookupHit)
   EXPECT_EQ(m_mgr.Lookup("DefaultCodecMap", "flac"), "FLAC");
 }
 
-TEST_F(TestSkinMapManager, LookupMissReturnsEmptyString)
+TEST_F(TestSkinMapManager, LookupMissReturnsRawKey)
 {
   Load(R"(
     <includes>
@@ -63,11 +63,11 @@ TEST_F(TestSkinMapManager, LookupMissReturnsEmptyString)
     </includes>
   )");
 
-  // Key not in map — empty string returned
-  EXPECT_EQ(m_mgr.Lookup("DefaultCodecMap", "unknown_codec"), "");
+  // Key not in map — raw value returned
+  EXPECT_EQ(m_mgr.Lookup("DefaultCodecMap", "unknown_codec"), "unknown_codec");
 }
 
-TEST_F(TestSkinMapManager, LookupUnknownMapReturnsEmptyString)
+TEST_F(TestSkinMapManager, LookupUnknownMapReturnsRawKey)
 {
   Load(R"(
     <includes>
@@ -77,8 +77,8 @@ TEST_F(TestSkinMapManager, LookupUnknownMapReturnsEmptyString)
     </includes>
   )");
 
-  // Map doesn't exist at all — empty string returned
-  EXPECT_EQ(m_mgr.Lookup("NonExistentMap", "ac3"), "");
+  // Map doesn't exist at all — raw value returned
+  EXPECT_EQ(m_mgr.Lookup("NonExistentMap", "ac3"), "ac3");
 }
 
 TEST_F(TestSkinMapManager, LookupEmptyKeyReturnsEmptyString)
@@ -142,7 +142,7 @@ TEST_F(TestSkinMapManager, RefOverrideTakesPriorityOverBase)
   EXPECT_EQ(m_mgr.Lookup("DefaultAltAudioMap", "flac"), "FLAC");
 }
 
-TEST_F(TestSkinMapManager, RefOverrideMissReturnsEmptyString)
+TEST_F(TestSkinMapManager, RefOverrideMissReturnsRawKey)
 {
   Load(R"(
     <includes>
@@ -155,8 +155,8 @@ TEST_F(TestSkinMapManager, RefOverrideMissReturnsEmptyString)
     </includes>
   )");
 
-  // Key not in override or base — empty string returned
-  EXPECT_EQ(m_mgr.Lookup("DefaultAltAudioMap", "unknown_codec"), "");
+  // Key not in override or base — raw value returned
+  EXPECT_EQ(m_mgr.Lookup("DefaultAltAudioMap", "unknown_codec"), "unknown_codec");
 }
 
 // ---------------------------------------------------------------------------
@@ -191,7 +191,7 @@ TEST_F(TestSkinMapManager, MultiLevelRefChain)
 // Circular ref detection
 // ---------------------------------------------------------------------------
 
-TEST_F(TestSkinMapManager, CircularRefReturnsEmptyString)
+TEST_F(TestSkinMapManager, CircularRefReturnsRawKey)
 {
   // Manually set up a circular ref that can't be expressed in valid XML
   // by calling LoadMaps twice with complementary refs.
@@ -207,9 +207,9 @@ TEST_F(TestSkinMapManager, CircularRefReturnsEmptyString)
     </includes>
   )");
 
-  // Should not infinite-loop; empty string returned
-  EXPECT_EQ(m_mgr.Lookup("MapA", "eac3"), "");
-  EXPECT_EQ(m_mgr.Lookup("MapB", "eac3"), "");
+  // Should not infinite-loop; raw value returned
+  EXPECT_EQ(m_mgr.Lookup("MapA", "eac3"), "eac3");
+  EXPECT_EQ(m_mgr.Lookup("MapB", "eac3"), "eac3");
 }
 
 // ---------------------------------------------------------------------------
@@ -244,8 +244,8 @@ TEST_F(TestSkinMapManager, EmptyMapProducesNoEntries)
     </includes>
   )");
 
-  // Map has no entries — empty string returned
-  EXPECT_EQ(m_mgr.Lookup("EmptyMap", "ac3"), "");
+  // Map has no entries — raw value returned
+  EXPECT_EQ(m_mgr.Lookup("EmptyMap", "ac3"), "ac3");
 }
 
 // ---------------------------------------------------------------------------
@@ -267,9 +267,9 @@ TEST_F(TestSkinMapManager, ClearRemovesAllMapsAndRefs)
 
   m_mgr.Clear();
 
-  // After clear everything returns empty string
-  EXPECT_EQ(m_mgr.Lookup("DefaultCodecMap", "ac3"), "");
-  EXPECT_EQ(m_mgr.Lookup("DefaultAltAudioMap", "ac3"), "");
+  // After clear everything returns raw key
+  EXPECT_EQ(m_mgr.Lookup("DefaultCodecMap", "ac3"), "ac3");
+  EXPECT_EQ(m_mgr.Lookup("DefaultAltAudioMap", "ac3"), "ac3");
 }
 
 // ---------------------------------------------------------------------------
@@ -421,7 +421,7 @@ TEST_F(TestSkinMapManager, EstuaryDefaultResolutionMap)
   EXPECT_EQ(m_mgr.Lookup("DefaultResolutionMap", "1080"), "HD");
   EXPECT_EQ(m_mgr.Lookup("DefaultResolutionMap", "4K"), "UHD");
   EXPECT_EQ(m_mgr.Lookup("DefaultResolutionMap", "8K"), "UHD");
-  EXPECT_EQ(m_mgr.Lookup("DefaultResolutionMap", "360"), ""); // unknown — empty
+  EXPECT_EQ(m_mgr.Lookup("DefaultResolutionMap", "360"), "360"); // unknown — raw
 }
 
 TEST_F(TestSkinMapManager, EstuaryDefaultHdrMap)
@@ -441,5 +441,5 @@ TEST_F(TestSkinMapManager, EstuaryDefaultHdrMap)
   EXPECT_EQ(m_mgr.Lookup("DefaultHdrMap", "hdr10plus"), "HDR10+");
   EXPECT_EQ(m_mgr.Lookup("DefaultHdrMap", "hdr10"), "HDR10");
   EXPECT_EQ(m_mgr.Lookup("DefaultHdrMap", "hlg"), "HLG");
-  EXPECT_EQ(m_mgr.Lookup("DefaultHdrMap", "sdr"), ""); // unknown — empty
+  EXPECT_EQ(m_mgr.Lookup("DefaultHdrMap", "sdr"), "sdr"); // unknown — raw
 }
