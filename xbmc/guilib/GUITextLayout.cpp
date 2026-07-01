@@ -403,7 +403,6 @@ void CGUITextLayout::ParseText(const std::wstring& text,
     KODI::UTILS::COLOR::Color newColor = currentColor;
     bool colorTagChange = false;
     bool newLine = false;
-    bool tabsTag = false;
     int tabs = 0;
     // have a [ - check if it's an ON or OFF switch
     bool on(true);
@@ -542,7 +541,7 @@ void CGUITextLayout::ParseText(const std::wstring& text,
         pos = finish + 1;
     }
 
-    if (newStyle || colorTagChange || newLine || tabs || tabsTag)
+    if (newStyle || colorTagChange || newLine || tabs)
     { // we have a new style or a new color, so format up the previous segment
       std::wstring subText = text.substr(startPos, endPos - startPos);
       if (currentStyle & FONT_STYLE_UPPERCASE)
