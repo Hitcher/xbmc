@@ -72,28 +72,27 @@ TEST_P(TestGUITextLayoutMatchedTags, TagStrippedContentPreserved)
 INSTANTIATE_TEST_SUITE_P(StyleTags,
                          TestGUITextLayoutMatchedTags,
                          testing::Values(
-                           // Basic style tags
-                           TagTestParam{"[B]bold[/B]", "bold"},
-                           TagTestParam{"[I]italic[/I]", "italic"},
-                           TagTestParam{"[LIGHT]text[/LIGHT]", "text"},
-                           // Case-transform tags also apply the transform
-                           TagTestParam{"[UPPERCASE]hello[/UPPERCASE]", "HELLO"},
-                           TagTestParam{"[LOWERCASE]HELLO[/LOWERCASE]", "hello"},
-                           TagTestParam{"[CAPITALIZE]hello world[/CAPITALIZE]", "Hello World"},
-                           // Tag with surrounding text
-                           TagTestParam{"prefix [B]bold[/B] suffix", "prefix bold suffix"},
-                           // CR tag becomes newline
-                           TagTestParam{"a[CR]b", "a\nb"},
-                           // TABS tag inserts the specified number of tab characters
-                           TagTestParam{"[TABS]1[/TABS]label", "\tlabel"},
-                           TagTestParam{"[TABS]2[/TABS]label", "\t\tlabel"},
-                           TagTestParam{"[TABS]3[/TABS]label", "\t\t\tlabel"},
-                           // Unmatched [TABS] without [/TABS]: the tag token is consumed but no
-                           // tabs are emitted; content after the tag passes through unchanged.
-                           TagTestParam{"[TABS]1 label", "1 label"},
-                           // Stray [/TABS] with no matching open is consumed, not passed through
-                           TagTestParam{"label[/TABS]", "label"}
-                         ));
+                             // Basic style tags
+                             TagTestParam{"[B]bold[/B]", "bold"},
+                             TagTestParam{"[I]italic[/I]", "italic"},
+                             TagTestParam{"[LIGHT]text[/LIGHT]", "text"},
+                             // Case-transform tags also apply the transform
+                             TagTestParam{"[UPPERCASE]hello[/UPPERCASE]", "HELLO"},
+                             TagTestParam{"[LOWERCASE]HELLO[/LOWERCASE]", "hello"},
+                             TagTestParam{"[CAPITALIZE]hello world[/CAPITALIZE]", "Hello World"},
+                             // Tag with surrounding text
+                             TagTestParam{"prefix [B]bold[/B] suffix", "prefix bold suffix"},
+                             // CR tag becomes newline
+                             TagTestParam{"a[CR]b", "a\nb"},
+                             // TABS tag inserts the specified number of tab characters
+                             TagTestParam{"[TABS]1[/TABS]label", "\tlabel"},
+                             TagTestParam{"[TABS]2[/TABS]label", "\t\tlabel"},
+                             TagTestParam{"[TABS]3[/TABS]label", "\t\t\tlabel"},
+                             // Unmatched [TABS] without [/TABS]: the tag token is consumed but no
+                             // tabs are emitted; content after the tag passes through unchanged.
+                             TagTestParam{"[TABS]1 label", "1 label"},
+                             // Stray [/TABS] with no matching open is consumed, not passed through
+                             TagTestParam{"label[/TABS]", "label"}));
 
 // ---------------------------------------------------------------------------
 // Nested matched tag pairs (PR #28280)
@@ -110,18 +109,17 @@ TEST_P(TestGUITextLayoutNestedTags, ContentPreserved)
   EXPECT_EQ(GetParam().expected, Filter(GetParam().input));
 }
 
-INSTANTIATE_TEST_SUITE_P(NestedStyleTags,
-                         TestGUITextLayoutNestedTags,
-                         testing::Values(
-                           TagTestParam{"[B][B]text[/B][/B]", "text"},
-                           TagTestParam{"[B][B][B]text[/B][/B][/B]", "text"},
-                           TagTestParam{"[I][I]text[/I][/I]", "text"},
-                           TagTestParam{"[LIGHT][LIGHT]text[/LIGHT][/LIGHT]", "text"},
-                           TagTestParam{"[UPPERCASE][UPPERCASE]hello[/UPPERCASE][/UPPERCASE]", "HELLO"},
-                           TagTestParam{"[LOWERCASE][LOWERCASE]HELLO[/LOWERCASE][/LOWERCASE]", "hello"},
-                           TagTestParam{"[CAPITALIZE][CAPITALIZE]hello world[/CAPITALIZE][/CAPITALIZE]",
-                                        "Hello World"}
-                         ));
+INSTANTIATE_TEST_SUITE_P(
+    NestedStyleTags,
+    TestGUITextLayoutNestedTags,
+    testing::Values(TagTestParam{"[B][B]text[/B][/B]", "text"},
+                    TagTestParam{"[B][B][B]text[/B][/B][/B]", "text"},
+                    TagTestParam{"[I][I]text[/I][/I]", "text"},
+                    TagTestParam{"[LIGHT][LIGHT]text[/LIGHT][/LIGHT]", "text"},
+                    TagTestParam{"[UPPERCASE][UPPERCASE]hello[/UPPERCASE][/UPPERCASE]", "HELLO"},
+                    TagTestParam{"[LOWERCASE][LOWERCASE]HELLO[/LOWERCASE][/LOWERCASE]", "hello"},
+                    TagTestParam{"[CAPITALIZE][CAPITALIZE]hello world[/CAPITALIZE][/CAPITALIZE]",
+                                 "Hello World"}));
 
 // ---------------------------------------------------------------------------
 // The primary regression scenario (PR #28356)
@@ -129,15 +127,14 @@ INSTANTIATE_TEST_SUITE_P(NestedStyleTags,
 // formatted its value with [B]…[/B], producing [B][B]value[/B][/B].
 // ---------------------------------------------------------------------------
 
-INSTANTIATE_TEST_SUITE_P(SkinWrappedAddonValues,
-                         TestGUITextLayoutNestedTags,
-                         testing::Values(
-                           TagTestParam{"[B][B]Episode Title[/B][/B]", "Episode Title"},
-                           TagTestParam{"[I][I]Some Value[/I][/I]", "Some Value"},
-                           TagTestParam{"[LIGHT][LIGHT]Some Value[/LIGHT][/LIGHT]", "Some Value"},
-                           TagTestParam{"[UPPERCASE][UPPERCASE]Some Title[/UPPERCASE][/UPPERCASE]",
-                                        "SOME TITLE"}
-                         ));
+INSTANTIATE_TEST_SUITE_P(
+    SkinWrappedAddonValues,
+    TestGUITextLayoutNestedTags,
+    testing::Values(TagTestParam{"[B][B]Episode Title[/B][/B]", "Episode Title"},
+                    TagTestParam{"[I][I]Some Value[/I][/I]", "Some Value"},
+                    TagTestParam{"[LIGHT][LIGHT]Some Value[/LIGHT][/LIGHT]", "Some Value"},
+                    TagTestParam{"[UPPERCASE][UPPERCASE]Some Title[/UPPERCASE][/UPPERCASE]",
+                                 "SOME TITLE"}));
 
 // ---------------------------------------------------------------------------
 // Unmatched opening tags (PR #28356 lookahead)
@@ -157,15 +154,13 @@ TEST_P(TestGUITextLayoutUnmatchedOpen, TagConsumedContentPreserved)
 
 INSTANTIATE_TEST_SUITE_P(UnmatchedOpenTags,
                          TestGUITextLayoutUnmatchedOpen,
-                         testing::Values(
-                           TagTestParam{"[B]no close", "[B]"},
-                           TagTestParam{"[I]no close", "[I]"},
-                           TagTestParam{"[LIGHT]no close", "[LIGHT]"},
-                           TagTestParam{"[UPPERCASE]no close", "[UPPERCASE]"},
-                           TagTestParam{"[LOWERCASE]no close", "[LOWERCASE]"},
-                           TagTestParam{"[CAPITALIZE]no close", "[CAPITALIZE]"},
-                           TagTestParam{"text[B]", "[B]"}
-                         ));
+                         testing::Values(TagTestParam{"[B]no close", "[B]"},
+                                         TagTestParam{"[I]no close", "[I]"},
+                                         TagTestParam{"[LIGHT]no close", "[LIGHT]"},
+                                         TagTestParam{"[UPPERCASE]no close", "[UPPERCASE]"},
+                                         TagTestParam{"[LOWERCASE]no close", "[LOWERCASE]"},
+                                         TagTestParam{"[CAPITALIZE]no close", "[CAPITALIZE]"},
+                                         TagTestParam{"text[B]", "[B]"}));
 
 // ---------------------------------------------------------------------------
 // Unmatched closing tags
@@ -184,18 +179,16 @@ TEST_P(TestGUITextLayoutUnmatchedClose, TagConsumedContentPreserved)
 
 INSTANTIATE_TEST_SUITE_P(UnmatchedCloseTags,
                          TestGUITextLayoutUnmatchedClose,
-                         testing::Values(
-                           TagTestParam{"[/B]text", "[/B]"},
-                           TagTestParam{"text [/B] more", "[/B]"},
-                           TagTestParam{"text [/I] more", "[/I]"},
-                           TagTestParam{"text [/LIGHT] more", "[/LIGHT]"},
-                           TagTestParam{"text [/UPPERCASE] more", "[/UPPERCASE]"},
-                           TagTestParam{"text [/LOWERCASE] more", "[/LOWERCASE]"},
-                           TagTestParam{"text [/CAPITALIZE] more", "[/CAPITALIZE]"},
-                           // Stray close after a valid matched pair (depth back to 0)
-                           TagTestParam{"[B]text[/B][/B]", "[/B]"},
-                           TagTestParam{"[B][B]text[/B][/B][/B]", "[/B]"}
-                         ));
+                         testing::Values(TagTestParam{"[/B]text", "[/B]"},
+                                         TagTestParam{"text [/B] more", "[/B]"},
+                                         TagTestParam{"text [/I] more", "[/I]"},
+                                         TagTestParam{"text [/LIGHT] more", "[/LIGHT]"},
+                                         TagTestParam{"text [/UPPERCASE] more", "[/UPPERCASE]"},
+                                         TagTestParam{"text [/LOWERCASE] more", "[/LOWERCASE]"},
+                                         TagTestParam{"text [/CAPITALIZE] more", "[/CAPITALIZE]"},
+                                         // Stray close after a valid matched pair (depth back to 0)
+                                         TagTestParam{"[B]text[/B][/B]", "[/B]"},
+                                         TagTestParam{"[B][B]text[/B][/B][/B]", "[/B]"}));
 
 // ---------------------------------------------------------------------------
 // Mixed / edge cases
