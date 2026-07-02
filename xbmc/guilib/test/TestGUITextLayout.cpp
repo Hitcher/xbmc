@@ -89,10 +89,8 @@ INSTANTIATE_TEST_SUITE_P(StyleTags,
                            TagTestParam{"[TABS]2[/TABS]label", "\t\tlabel"},
                            TagTestParam{"[TABS]3[/TABS]label", "\t\t\tlabel"},
                            // Unmatched [TABS] without [/TABS]: the tag token is consumed but no
-                           // tabs are emitted and the content after the tag is passed through.
-                           // This differs from other style tags where unmatched content still
-                           // appears verbatim; [TABS] requires a closing [/TABS] to do anything.
-                           TagTestParam{"[TABS]1 label", "label"},
+                           // tabs are emitted; content after the tag passes through unchanged.
+                           TagTestParam{"[TABS]1 label", "1 label"},
                            // Stray [/TABS] with no matching open is consumed, not passed through
                            TagTestParam{"label[/TABS]", "label"}
                          ));
