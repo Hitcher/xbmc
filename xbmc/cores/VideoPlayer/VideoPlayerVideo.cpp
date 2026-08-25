@@ -935,8 +935,15 @@ CVideoPlayerVideo::EOutputState CVideoPlayerVideo::OutputPicture(const VideoPict
 
   auto timeToDisplay = std::chrono::milliseconds(DVD_TIME_TO_MSEC(pPicture->pts - iPlayingClock));
 
+  std::chrono::milliseconds renderWaitTime = 500ms;
+#if defined(TARGET_ANDROID)
+  if (pPicture->hdrType == StreamHdrType::HDR_TYPE_DOLBYVISION)
+    renderWaitTime = 1500ms;
+#endif
+
   // make sure waiting time is not negative
-  std::chrono::milliseconds maxWaitTime = std::min(std::max(timeToDisplay + 500ms, 50ms), 500ms);
+  std::chrono::milliseconds maxWaitTime =
+      std::min(std::max(timeToDisplay + renderWaitTime, 50ms), renderWaitTime);
   // don't wait when going ff
   if (m_speed > DVD_PLAYSPEED_NORMAL)
     maxWaitTime = std::max(timeToDisplay, 0ms);
