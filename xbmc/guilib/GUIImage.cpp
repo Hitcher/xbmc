@@ -117,7 +117,10 @@ void CGUIImage::AllocateOnDemand()
   // if we're hidden, we can free our resources and return
   if (!IsVisible() && m_visible != DELAYED && m_bDynamicResourceAlloc)
   {
+    // Hiding an empty fallback must not make the failed image look like a new request.
+    const std::string failedImage = m_textureCurrent->GetFileName().empty() ? m_nameCurrent : "";
     FreeResourcesButNotAnims();
+    m_nameCurrent = failedImage;
     return;
   }
 
@@ -630,7 +633,7 @@ unsigned char CGUIImage::GetFadeLevel(unsigned int time) const
   return (unsigned char)(255.0f * (1 - pow(1-alpha, amount))/alpha);
 }
 
-std::string CGUIImage::GetFallback(const std::string& currentName)
+std::string CGUIImage::GetFallback(const std::string& currentName) const
 {
   if (!m_currentFallback.empty() && currentName != m_currentFallback)
     return m_currentFallback;
@@ -640,8 +643,18 @@ std::string CGUIImage::GetFallback(const std::string& currentName)
 
 std::string CGUIImage::GetDescription(void) const
 {
-  // report the incoming texture as soon as it resolves so Control.GetLabel doesn't lag the fade
-  if (m_isTransitioning && (m_textureNext->ReadyToRender() || m_textureNext->GetFileName().empty()))
+  // Hidden controls need the pending filename before Process() can run.
+  if (m_hasNewStagingTexture)
+  {
+    const std::string fileName = m_nameStaging.empty() ? GetFallback(m_nameStaging) : m_nameStaging;
+    if (m_nameCurrent == fileName || m_textureCurrent->GetFileName() == fileName)
+      return m_textureCurrent->GetFileName();
+    if (m_nameNext == fileName || m_textureNext->GetFileName() == fileName)
+      return m_textureNext->GetFileName();
+    return fileName;
+  }
+
+  if (m_isTransitioning)
     return m_textureNext->GetFileName();
   return GetFileName();
 }
